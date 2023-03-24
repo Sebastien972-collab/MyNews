@@ -12,6 +12,7 @@ struct DiscoverView: View {
     @State private var searchViewIsPresented = false
     @ObservedObject var searchNews: SearchNews
     @AppStorage("recentSearch") private var recentSearch = "Environnement"
+    @FocusState private var fieldIsFocused : Bool
     
     var body: some View {
         NavigationStack {
@@ -24,6 +25,7 @@ struct DiscoverView: View {
                             recentSearch = searchNews.search
                         }
                         .submitLabel(.search)
+                        .focused($fieldIsFocused)
                         .padding()
                     
                     ForEach(filterTheme, id: \.self) { theme in
@@ -38,11 +40,14 @@ struct DiscoverView: View {
                     }
                 }
             })
-            .onAppear() {
-                searchNews.page = 1
+            .onTapGesture {
+                fieldIsFocused = false
             }
             .alert(searchNews.newsError.localizedDescription, isPresented: $searchNews.showError) {
                 Button("Ok", role: .cancel) { }
+            }
+            .onAppear() {
+                searchNews.page = 1
             }
             .navigationTitle(Text("Discover"))
             

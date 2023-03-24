@@ -13,7 +13,8 @@ struct HomeImageBubble: View {
     var body: some View {
         ZStack {
             AsyncImage(url: URL(string: (article.urlToImage!))) { image in
-                image.resizable()
+                image
+                    .resizable()
                     .aspectRatio(contentMode: .fill)
             } placeholder: {
                 ProgressView()
@@ -31,9 +32,10 @@ struct HomeImageBubble: View {
             .padding()
         }
         .frame(width: 350, height: 200)
+        .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black))
+        .shadow(radius: 25)
         .clipShape(RoundedRectangle(cornerRadius: 25))
-        .overlay(RoundedRectangle(cornerRadius: 25).stroke())
-        .shadow(radius: 5)
+        
     }
 }
 
