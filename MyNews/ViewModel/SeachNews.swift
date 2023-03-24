@@ -11,12 +11,14 @@ class SearchNews: ObservableObject {
     static var shared = SearchNews()
     private init(){}
     @Published var search: String = ""
-    @Published var breakingNews: [Article] = [.preview,.preview,.preview,.preview,.preview,.preview]
-    @Published var news: [Article] = [.preview,.preview,.preview,.preview,.preview,.preview]
+    @Published var breakingNews: [Article] = []
+    @Published var news: [Article] = []
     @Published var newsError: Error = NewsError.uknowError
     @Published var showError : Bool = false
     @Published var inProgress : Bool = false
     @Published var isComplete : Bool = false
+    @Published var page : Int = 1
+
     
     func getBreakingNews() {
         NewsService.shared.getNews { succees , news, error in
@@ -26,11 +28,12 @@ class SearchNews: ObservableObject {
                 self.showError.toggle()
                 return
             }
-            self.breakingNews = news
-            
-            
-            
-            
+            self.breakingNews = []
+            for new in news {
+                if new.urlToImage != nil {
+                    self.breakingNews.append(new)
+                }
+            }
         }
     }
     func launchSearch(_ theme: String?) {

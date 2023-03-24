@@ -32,7 +32,6 @@ struct HomeView: View {
                         NavigationLink(destination: NewsDetailView(article: article)) {
                             NewsRow(article: article)
                         }
-                        .foregroundColor(.black)
                     }
                 }
                 
@@ -44,10 +43,10 @@ struct HomeView: View {
                 } label: {
                     Text("Search")
                 }
-
+                
             }
             .onAppear(){
-                if searchNews.news.isEmpty {
+                if searchNews.breakingNews.isEmpty || searchNews.news.isEmpty {
                     searchNews.getBreakingNews()
                     searchNews.launchSearch("recommandation")
                 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NewsDetailView: View {
     let article: Article
+    @State private var safariViewIsPresented = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -28,15 +29,16 @@ struct NewsDetailView: View {
             }
             Text(article.content)
             Spacer()
-            Button(action: {
-                
-            }, label: {
+            Button {
+                safariViewIsPresented.toggle()
+            } label: {
                 Text("Lire plus")
-            })
+            }
         }
-        
-        
         .padding()
+        .fullScreenCover(isPresented: $safariViewIsPresented) {
+            SafariView(url: article.url)
+        }
     }
     
 }

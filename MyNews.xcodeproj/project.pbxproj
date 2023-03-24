@@ -14,6 +14,8 @@
 		CF5EFE8F29B88EFB002598C3 /* NewsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5EFE8E29B88EFB002598C3 /* NewsError.swift */; };
 		CF5EFE9129C008AF002598C3 /* NewsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5EFE9029C008AF002598C3 /* NewsDetailView.swift */; };
 		CF919C4B29C8867B009A73FC /* NewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF919C4A29C8867B009A73FC /* NewsListView.swift */; };
+		CF919C4E29CB4D5F009A73FC /* SJDKitToolBox in Frameworks */ = {isa = PBXBuildFile; productRef = CF919C4D29CB4D5F009A73FC /* SJDKitToolBox */; };
+		CF919C5129CB4DBC009A73FC /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF919C5029CB4DBC009A73FC /* SafariView.swift */; };
 		CFBAB97629B8255A006FDF8A /* MyNewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAB97529B8255A006FDF8A /* MyNewsApp.swift */; };
 		CFBAB97829B8255A006FDF8A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAB97729B8255A006FDF8A /* ContentView.swift */; };
 		CFBAB97A29B8255B006FDF8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBAB97929B8255B006FDF8A /* Assets.xcassets */; };
@@ -55,6 +57,7 @@
 		CF5EFE8E29B88EFB002598C3 /* NewsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsError.swift; sourceTree = "<group>"; };
 		CF5EFE9029C008AF002598C3 /* NewsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailView.swift; sourceTree = "<group>"; };
 		CF919C4A29C8867B009A73FC /* NewsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListView.swift; sourceTree = "<group>"; };
+		CF919C5029CB4DBC009A73FC /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		CFBAB97229B8255A006FDF8A /* MyNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFBAB97529B8255A006FDF8A /* MyNewsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNewsApp.swift; sourceTree = "<group>"; };
 		CFBAB97729B8255A006FDF8A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,6 +82,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFBAB9AC29B84A66006FDF8A /* Alamofire in Frameworks */,
+				CF919C4E29CB4D5F009A73FC /* SJDKitToolBox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +109,7 @@
 				CF5EFE9029C008AF002598C3 /* NewsDetailView.swift */,
 				CFBAB9A629B846C1006FDF8A /* NewsRow.swift */,
 				CF5EFE8929B866C0002598C3 /* ThemeButton.swift */,
+				CF919C5029CB4DBC009A73FC /* SafariView.swift */,
 			);
 			path = UtilsView;
 			sourceTree = "<group>";
@@ -115,6 +120,16 @@
 				CF5EFE8E29B88EFB002598C3 /* NewsError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		CF919C4F29CB4D91009A73FC /* News */ = {
+			isa = PBXGroup;
+			children = (
+				CFBAB9A229B8274A006FDF8A /* HomeView.swift */,
+				CF49455C29C016B700558ABA /* DiscoverView.swift */,
+				CF919C4A29C8867B009A73FC /* NewsListView.swift */,
+			);
+			path = News;
 			sourceTree = "<group>";
 		};
 		CFBAB96929B8255A006FDF8A = {
@@ -190,9 +205,7 @@
 				CFBAB97729B8255A006FDF8A /* ContentView.swift */,
 				CF5EFE8829B866A8002598C3 /* UtilsView */,
 				CFBAB9B029B85AFF006FDF8A /* ImagesView */,
-				CFBAB9A229B8274A006FDF8A /* HomeView.swift */,
-				CF49455C29C016B700558ABA /* DiscoverView.swift */,
-				CF919C4A29C8867B009A73FC /* NewsListView.swift */,
+				CF919C4F29CB4D91009A73FC /* News */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -242,6 +255,7 @@
 			name = MyNews;
 			packageProductDependencies = (
 				CFBAB9AB29B84A66006FDF8A /* Alamofire */,
+				CF919C4D29CB4D5F009A73FC /* SJDKitToolBox */,
 			);
 			productName = MyNews;
 			productReference = CFBAB97229B8255A006FDF8A /* MyNews.app */;
@@ -317,6 +331,7 @@
 			mainGroup = CFBAB96929B8255A006FDF8A;
 			packageReferences = (
 				CFBAB9AA29B84A66006FDF8A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				CF919C4C29CB4D5F009A73FC /* XCRemoteSwiftPackageReference "SJDKitToolBox" */,
 			);
 			productRefGroup = CFBAB97329B8255A006FDF8A /* Products */;
 			projectDirPath = "";
@@ -372,6 +387,7 @@
 				CFBAB9A529B8459C006FDF8A /* News.swift in Sources */,
 				CFBAB9A729B846C1006FDF8A /* NewsRow.swift in Sources */,
 				CFBAB97629B8255A006FDF8A /* MyNewsApp.swift in Sources */,
+				CF919C5129CB4DBC009A73FC /* SafariView.swift in Sources */,
 				CF49455D29C016B700558ABA /* DiscoverView.swift in Sources */,
 				CF5EFE8A29B866C0002598C3 /* ThemeButton.swift in Sources */,
 				CF5EFE9129C008AF002598C3 /* NewsDetailView.swift in Sources */,
@@ -701,6 +717,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CF919C4C29CB4D5F009A73FC /* XCRemoteSwiftPackageReference "SJDKitToolBox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Sebastien972-collab/SJDKitToolBox.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		CFBAB9AA29B84A66006FDF8A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -712,6 +736,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CF919C4D29CB4D5F009A73FC /* SJDKitToolBox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF919C4C29CB4D5F009A73FC /* XCRemoteSwiftPackageReference "SJDKitToolBox" */;
+			productName = SJDKitToolBox;
+		};
 		CFBAB9AB29B84A66006FDF8A /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CFBAB9AA29B84A66006FDF8A /* XCRemoteSwiftPackageReference "Alamofire" */;

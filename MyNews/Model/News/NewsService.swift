@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import SJDKitToolBox
 
 class NewsService {
     static var shared = NewsService()
@@ -18,8 +18,7 @@ class NewsService {
     }
     
     func getNews(callback: @escaping (Bool, [Article]?, Error?) -> Void)  {
-        //        let ingredientsForUrl = Utils.clearForUrl(ingredients)
-        let baseUrl = URL(string: "https://newsapi.org/v2/everything?q=breaking%20news&apiKey=c20fd58be9174ab5941ec7a08eeb88df&language=fr")!
+        let baseUrl = URL(string: "https://newsapi.org/v2/everything?q=france&apiKey=c20fd58be9174ab5941ec7a08eeb88df&language=fr&page=1&pageSize=5")!
         print(baseUrl)
         launchSession(baseUrl: baseUrl) { success, news, error in
             callback(success, news, error)
@@ -27,11 +26,10 @@ class NewsService {
         
     }
     func launchSearch(search: String, callback: @escaping (Bool, [Article]?, Error?) -> Void)  {
-        //        let ingredientsForUrl = Utils.clearForUrl(ingredients)
+        let searchToUrl = search.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<BaseUrl>>>>>>>>>>>>>>>>>>>>>>>>")
         print(search)
-        let baseUrl = URL(string: "https://newsapi.org/v2/everything?q=\(search.utf8)&apiKey=c20fd58be9174ab5941ec7a08eeb88df&language=fr")!
-        
+        let baseUrl = URL(string: "https://newsapi.org/v2/everything?q=\(searchToUrl)&apiKey=c20fd58be9174ab5941ec7a08eeb88df&language=fr&page=1&pageSize=10")!
         launchSession(baseUrl: baseUrl) { success, news, error in
             callback(success, news, error)
         }
@@ -39,7 +37,7 @@ class NewsService {
     }
     
     func getBreakingNews(callback: @escaping (Bool, [Article]?, Error?) -> Void) {
-        let baseUrl = URL(string: "https://newsapi.org/v2/top-headlines?country=fr&apiKey=c20fd58be9174ab5941ec7a08eeb88df")!
+        let baseUrl = URL(string: "https://newsapi.org/v2/top-headlines?country=fr&apiKey=c20fd58be9174ab5941ec7a08eeb88df&page=1&pageSize=10")!
         launchSession(baseUrl: baseUrl) { success, news, error in
             callback(success, news, error)
         }
