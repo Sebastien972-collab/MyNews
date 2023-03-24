@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NewsListView: View {
+    
+    @ObservedObject var searchNews: SearchNews
     var news: [Article]
     var body: some View {
         VStack {
@@ -25,10 +27,13 @@ struct NewsListView: View {
                 .navigationTitle(Text("Search"))
             }
             Button {
-                
+                searchNews.nextPage()
             } label: {
                 Text("Charger plus")
                     .padding()
+            }
+            .alert(searchNews.newsError.localizedDescription, isPresented: $searchNews.showError) {
+                Button("Ok", role: .cancel) { }
             }
 
         }
@@ -38,7 +43,7 @@ struct NewsListView: View {
 struct NexsListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            NewsListView(news: [.preview, .preview, .preview, .preview, .preview, .preview])
+            NewsListView(searchNews: .shared, news: [.preview, .preview, .preview, .preview, .preview, .preview])
         }
     }
 }

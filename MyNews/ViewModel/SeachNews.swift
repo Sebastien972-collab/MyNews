@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import SJDKitToolBox
 
 class SearchNews: ObservableObject {
     static var shared = SearchNews()
     private init(){}
     @Published var search: String = ""
+    private var previousResearch: String = ""
     @Published var breakingNews: [Article] = []
     @Published var news: [Article] = []
     @Published var newsError: Error = NewsError.uknowError
@@ -18,7 +20,7 @@ class SearchNews: ObservableObject {
     @Published var inProgress : Bool = false
     @Published var isComplete : Bool = false
     @Published var page : Int = 1
-
+    
     
     func getBreakingNews() {
         NewsService.shared.getNews { succees , news, error in
@@ -38,11 +40,37 @@ class SearchNews: ObservableObject {
     }
     func launchSearch(_ theme: String?) {
         print("Launch search")
-        if let theme = theme {
-            NewsService.shared.launchSearch(search: theme, callback: handle)
-        } else {
-            NewsService.shared.launchSearch(search: search, callback: handle)
+        print(search)
+        
+        guard theme != nil || search.isNotEmpty else {
+            newsError = NewsError.fieldEmpty
+            showError.toggle()
+            return
         }
+        previousResearch = search
+        if let theme = theme {
+            previousResearch = theme
+            NewsService.shared.launchSearch(search: theme, page: page, callback: handle)
+        } else {
+            previousResearch = search
+            NewsService.shared.launchSearch(search: search, page: page, callback: handle)
+        }
+        if page < 2 {
+            self.isComplete.toggle()
+        }
+    }
+    
+    func nextPage() {
+        print("Next page de la recherche = \(previousResearch)")
+        guard page <= 10 else {
+            newsError = NewsError.noNewsFound
+            showError.toggle()
+            page = 1
+            return
+        }
+        page += 1
+        launchSearch(previousResearch)
+        
     }
     
     private func handle(success: Bool, news: [Article]?, error: Error?) {
@@ -52,15 +80,20 @@ class SearchNews: ObservableObject {
             return
         }
         
-        self.news = news
-        guard !self.news.isEmpty else {
-            self.newsError = NewsError.noRecipeFound
+        guard !news.isEmpty else {
+            self.newsError = NewsError.noNewsFound
             self.showError.toggle()
             return
         }
+        if page == 1 {
+            self.news.removeAll()
+        }
+        for new in news {
+            if new.urlToImage != nil {
+                self.news.append(new)
+            }
+        }
         print(self.news.count)
-        self.isComplete.toggle()
-        
         self.inProgress.toggle()
     }
 }

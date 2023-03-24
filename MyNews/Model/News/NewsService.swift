@@ -12,6 +12,7 @@ class NewsService {
     static var shared = NewsService()
     private init(){}
     private var newsSession = NewsSession()
+    
     init(recipeSession: NewsSession) {
         self.newsSession = recipeSession
         
@@ -25,23 +26,30 @@ class NewsService {
         }
         
     }
-    func launchSearch(search: String, callback: @escaping (Bool, [Article]?, Error?) -> Void)  {
+    func launchSearch(search: String, page: Int, callback: @escaping (Bool, [Article]?, Error?) -> Void)  {
         let searchToUrl = search.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<BaseUrl>>>>>>>>>>>>>>>>>>>>>>>>")
         print(search)
-        let baseUrl = URL(string: "https://newsapi.org/v2/everything?q=\(searchToUrl)&apiKey=c20fd58be9174ab5941ec7a08eeb88df&language=fr&page=1&pageSize=10")!
+        let baseUrl = URL(string: "https://newsapi.org/v2/everything?q=\(searchToUrl)&apiKey=c20fd58be9174ab5941ec7a08eeb88df&language=fr&page=\(page)&pageSize=10")!
         launchSession(baseUrl: baseUrl) { success, news, error in
             callback(success, news, error)
         }
-        
     }
     
-    func getBreakingNews(callback: @escaping (Bool, [Article]?, Error?) -> Void) {
-        let baseUrl = URL(string: "https://newsapi.org/v2/top-headlines?country=fr&apiKey=c20fd58be9174ab5941ec7a08eeb88df&page=1&pageSize=10")!
-        launchSession(baseUrl: baseUrl) { success, news, error in
-            callback(success, news, error)
-        }
-    }
+//    func nextPage(search: String, callback: @escaping (Bool, [Article]?, Error?) -> Void) {
+//        page += 1
+//        launchSearch(search: search) { success, news, error in
+//            callback(success, news, error)
+//        }
+//        
+//    }
+    
+//    func getBreakingNews(callback: @escaping (Bool, [Article]?, Error?) -> Void) {
+//        let baseUrl = URL(string: "https://newsapi.org/v2/top-headlines?country=fr&apiKey=c20fd58be9174ab5941ec7a08eeb88df&page=1&pageSize=10")!
+//        launchSession(baseUrl: baseUrl) { success, news, error in
+//            callback(success, news, error)
+//        }
+//    }
     
     private func launchSession(baseUrl: URL, callback: @escaping (Bool, [Article]?, Error?) -> Void) {
         newsSession.session(url: baseUrl) { result in

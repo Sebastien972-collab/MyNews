@@ -33,12 +33,19 @@ struct DiscoverView: View {
                             Text(theme)
                         })
                         .navigationDestination(isPresented: $searchNews.isComplete) {
-                            NewsListView(news: searchNews.news)
+                            NewsListView(searchNews: searchNews, news: searchNews.news)
                         }
                     }
                 }
             })
+            .onAppear() {
+                searchNews.page = 1
+            }
+            .alert(searchNews.newsError.localizedDescription, isPresented: $searchNews.showError) {
+                Button("Ok", role: .cancel) { }
+            }
             .navigationTitle(Text("Discover"))
+            
         }
     }
     private var filterTheme: [String] {

@@ -51,6 +51,9 @@ struct HomeView: View {
                     searchNews.launchSearch("recommandation")
                 }
             }
+            .alert(searchNews.newsError.localizedDescription, isPresented: $searchNews.showError) {
+                Button("Ok", role: .cancel) { }
+            }
             .navigationTitle(Text("Breaking News"))
             .padding(8)
         }
