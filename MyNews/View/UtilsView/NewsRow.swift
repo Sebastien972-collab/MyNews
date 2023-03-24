@@ -12,23 +12,15 @@ struct NewsRow: View {
     
     var body: some View {
         HStack {
-            if let url = article.urlToImage {
-                AsyncImage(url: URL(string: (url))) { image in
-                    image
-                        .resizable()
-                        .renderingMode(.original)
-                        .frame(width: 100, height: 100)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        .scaledToFit()
-                } placeholder: {
-                    ProgressView()
-                }
-            } else {
-                Image(systemName: "network")
+            AsyncImage(url: URL(string: (article.urlToImage!))) { image in
+                image
                     .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 100, height: 100)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
-                    .foregroundColor(.red)
+                    
+            } placeholder: {
+                ProgressView()
             }
             VStack(alignment: .leading, spacing: 10) {
                 Text(article.source.name)

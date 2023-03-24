@@ -20,7 +20,9 @@ struct NewsDetailView: View {
                 .font(.title)
                 .bold()
             AsyncImage(url: URL(string: article.urlToImage ?? Article.preview.urlToImage!)) { image in
-                image.resizable()
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .frame(maxWidth: .infinity, maxHeight: 200)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
                     

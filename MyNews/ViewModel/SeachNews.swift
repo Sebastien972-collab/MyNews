@@ -14,6 +14,7 @@ class SearchNews: ObservableObject {
     @Published var search: String = ""
     private var previousResearch: String = ""
     @Published var breakingNews: [Article] = []
+    private var isBreakingNews = false
     @Published var news: [Article] = []
     @Published var newsError: Error = NewsError.uknowError
     @Published var showError : Bool = false
@@ -23,20 +24,8 @@ class SearchNews: ObservableObject {
     
     
     func getBreakingNews() {
-        NewsService.shared.getNews { succees , news, error in
-            guard succees, let news = news, error == nil else {
-                print(error?.localizedDescription ?? "Unknow error")
-                self.newsError = error ?? NewsError.uknowError
-                self.showError.toggle()
-                return
-            }
-            self.breakingNews = []
-            for new in news {
-                if new.urlToImage != nil {
-                    self.breakingNews.append(new)
-                }
-            }
-        }
+        self.isBreakingNews = true
+        NewsService.shared.getNews(callback: handle)
     }
     func launchSearch(_ theme: String?) {
         print("Launch search")
@@ -88,12 +77,16 @@ class SearchNews: ObservableObject {
         if page == 1 {
             self.news.removeAll()
         }
-        for new in news {
-            if new.urlToImage != nil {
-                self.news.append(new)
+        if isBreakingNews {
+            self.breakingNews = news
+            self.isBreakingNews = false
+        } else {
+            for new in news {
+                if new.urlToImage != nil {
+                    self.news.append(new)
+                }
             }
         }
-        print(self.news.count)
         self.inProgress.toggle()
     }
 }

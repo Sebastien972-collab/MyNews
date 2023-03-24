@@ -11,7 +11,7 @@ import SJDKitToolBox
 class NewsService {
     static var shared = NewsService()
     private init(){}
-    private var newsSession = NewsSession()
+    private var newsSession: NewsSession = NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData))
     
     init(recipeSession: NewsSession) {
         self.newsSession = recipeSession
@@ -36,21 +36,6 @@ class NewsService {
         }
     }
     
-//    func nextPage(search: String, callback: @escaping (Bool, [Article]?, Error?) -> Void) {
-//        page += 1
-//        launchSearch(search: search) { success, news, error in
-//            callback(success, news, error)
-//        }
-//        
-//    }
-    
-//    func getBreakingNews(callback: @escaping (Bool, [Article]?, Error?) -> Void) {
-//        let baseUrl = URL(string: "https://newsapi.org/v2/top-headlines?country=fr&apiKey=c20fd58be9174ab5941ec7a08eeb88df&page=1&pageSize=10")!
-//        launchSession(baseUrl: baseUrl) { success, news, error in
-//            callback(success, news, error)
-//        }
-//    }
-    
     private func launchSession(baseUrl: URL, callback: @escaping (Bool, [Article]?, Error?) -> Void) {
         newsSession.session(url: baseUrl) { result in
             switch result {
@@ -67,6 +52,10 @@ class NewsService {
                 callback(false, nil, failure)
             }
         }
+        
+    }
+    
+    func fakeSession() {
         
     }
     
