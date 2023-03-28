@@ -21,29 +21,39 @@ class SearchNews: ObservableObject {
     @Published var inProgress : Bool = false
     @Published var isComplete : Bool = false
     @Published var page : Int = 1
+    private var service: NewsService = NewsService.shared
     
+    
+    init(service: NewsService) {
+        self.service = service
+    }
     
     func getBreakingNews() {
         self.isBreakingNews = true
-        NewsService.shared.getNews(callback: handle)
+        service.getNews(callback: handle)
     }
     func launchSearch(_ theme: String?) {
         print("Launch search")
         print(search)
         
         guard theme != nil || search.isNotEmpty else {
-            newsError = NewsError.fieldEmpty
+            newsError = NewsError.invalidField
             showError.toggle()
             return
         }
         previousResearch = search
         if let theme = theme {
+            guard theme.isNotEmpty else {
+                launchError(NewsError.invalidField)
+                return
+            }
             previousResearch = theme
-            NewsService.shared.launchSearch(search: theme, page: page, callback: handle)
+            service.launchSearch(search: theme, page: page, callback: handle)
         } else {
             previousResearch = search
-            NewsService.shared.launchSearch(search: search, page: page, callback: handle)
+            service.launchSearch(search: search, page: page, callback: handle)
         }
+        
         if page < 2 {
             self.isComplete.toggle()
         }
@@ -51,9 +61,8 @@ class SearchNews: ObservableObject {
     
     func nextPage() {
         print("Next page de la recherche = \(previousResearch)")
-        guard page <= 10 else {
-            newsError = NewsError.noNewsFound
-            showError.toggle()
+        guard page < 10 else {
+            launchError(NewsError.pageLimit)
             page = 1
             return
         }
@@ -62,16 +71,19 @@ class SearchNews: ObservableObject {
         
     }
     
+    private func launchError(_ error: Error) {
+        newsError = error
+        showError = true
+    }
+    
     private func handle(success: Bool, news: [Article]?, error: Error?) {
         guard success, let news = news, error == nil else {
-            self.newsError = error ?? NewsError.uknowError
-            self.showError.toggle()
+            launchError(error ?? NewsError.uknowError)
             return
         }
         
         guard !news.isEmpty else {
-            self.newsError = NewsError.noNewsFound
-            self.showError.toggle()
+            launchError(NewsError.noNewsFound)
             return
         }
         if page == 1 {

@@ -8,7 +8,7 @@
 import Foundation
 
 enum NewsError : Error {
-    case invalidField, invalidCharacter, fieldEmpty, noNewsFound ,uknowError
+    case invalidField, pageLimit, fieldEmpty, noNewsFound ,uknowError
 }
 
 extension NewsError : LocalizedError {
@@ -16,8 +16,8 @@ extension NewsError : LocalizedError {
         switch self {
         case .invalidField :
             return NSLocalizedString("Le text n'est pas valide", comment: "Champ invalid")
-        case .invalidCharacter :
-            return NSLocalizedString("Le charactère n'est pas pris en charge.", comment: "Charactère non pris en charge.")
+        case .pageLimit :
+            return NSLocalizedString("Sorry you have reached the limit of page to consult", comment: "Page Milit")
         case .fieldEmpty :
             return NSLocalizedString("Oups... Ce champ ne peut pas être vide", comment: "Champ vide")
         case .noNewsFound :

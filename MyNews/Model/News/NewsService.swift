@@ -52,11 +52,5 @@ class NewsService {
                 callback(false, nil, failure)
             }
         }
-        
     }
-    
-    func fakeSession() {
-        
-    }
-    
 }
