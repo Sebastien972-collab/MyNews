@@ -76,6 +76,15 @@ class SearchNews: ObservableObject {
         showError = true
     }
     
+    func addNews(news: [Article]) -> [Article] {
+        var newsToReturn: [Article] = []
+        for new in news {
+            if new.urlToImage != nil {
+                newsToReturn.append(new)
+            }
+        }
+        return newsToReturn
+    }
     private func handle(success: Bool, news: [Article]?, error: Error?) {
         guard success, let news = news, error == nil else {
             launchError(error ?? NewsError.uknowError)
@@ -90,14 +99,14 @@ class SearchNews: ObservableObject {
             self.news.removeAll()
         }
         if isBreakingNews {
-            self.breakingNews = news
+            self.breakingNews = addNews(news: news)
             self.isBreakingNews = false
         } else {
-            for new in news {
-                if new.urlToImage != nil {
-                    self.news.append(new)
-                }
-            }
+            self.news = addNews(news: news)
+        }
+        guard news.isNotEmpty else {
+            launchError(NewsError.noNewsFound)
+            return
         }
         self.inProgress.toggle()
     }

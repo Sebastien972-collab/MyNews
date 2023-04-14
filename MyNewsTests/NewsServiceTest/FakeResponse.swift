@@ -11,3 +11,4 @@ import Alamofire
 struct FakeResponse {
     var result : Result<Data, AFError>
 }
+

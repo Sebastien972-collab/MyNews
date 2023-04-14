@@ -36,14 +36,6 @@ struct HomeView: View {
                 }
                 
                 Spacer()
-                Button {
-                    searchNews.getBreakingNews()
-                    print(searchNews.news.count)
-                    
-                } label: {
-                    Text("Search")
-                }
-                
             }
             .onAppear(){
                 if searchNews.breakingNews.isEmpty || searchNews.news.isEmpty {

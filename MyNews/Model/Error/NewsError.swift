@@ -17,7 +17,7 @@ extension NewsError : LocalizedError {
         case .invalidField :
             return NSLocalizedString("Le text n'est pas valide", comment: "Champ invalid")
         case .pageLimit :
-            return NSLocalizedString("Sorry you have reached the limit of page to consult", comment: "Page Milit")
+            return NSLocalizedString("Sorry you have reached the limit of page to consult", comment: "Page Limit")
         case .fieldEmpty :
             return NSLocalizedString("Oups... Ce champ ne peut pas être vide", comment: "Champ vide")
         case .noNewsFound :

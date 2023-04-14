@@ -12,13 +12,21 @@ struct HomeImageBubble: View {
     
     var body: some View {
         ZStack {
-            AsyncImage(url: URL(string: (article.urlToImage!))) { image in
-                image
+            if let url = article.urlToImage {
+                AsyncImage(url: URL(string: (url))) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    ProgressView()
+                        .frame(width: 80, height: 80)
+                }
+            } else {
+                Image(systemName: "network")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-            } placeholder: {
-                ProgressView()
             }
+
             HStack {
                 VStack(alignment: .leading, spacing: 5) {
                     Spacer()

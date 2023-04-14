@@ -11,7 +11,7 @@ import SJDKitToolBox
 class NewsService {
     static var shared = NewsService()
     private init(){}
-    private var newsSession: NewsSession = NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData))
+    private var newsSession: NewsSession = NewsSession()
     
     init(recipeSession: NewsSession) {
         self.newsSession = recipeSession
