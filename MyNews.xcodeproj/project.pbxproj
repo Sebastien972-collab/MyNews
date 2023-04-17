@@ -16,7 +16,6 @@
 		CF5EFE8F29B88EFB002598C3 /* NewsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5EFE8E29B88EFB002598C3 /* NewsError.swift */; };
 		CF5EFE9129C008AF002598C3 /* NewsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5EFE9029C008AF002598C3 /* NewsDetailView.swift */; };
 		CF919C4B29C8867B009A73FC /* NewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF919C4A29C8867B009A73FC /* NewsListView.swift */; };
-		CF919C4E29CB4D5F009A73FC /* SJDKitToolBox in Frameworks */ = {isa = PBXBuildFile; productRef = CF919C4D29CB4D5F009A73FC /* SJDKitToolBox */; };
 		CF919C5129CB4DBC009A73FC /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF919C5029CB4DBC009A73FC /* SafariView.swift */; };
 		CFAC547729ECCD8F0090510C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CFAC547629ECCD8F0090510C /* FirebaseAnalytics */; };
 		CFAC547929ECCD8F0090510C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = CFAC547829ECCD8F0090510C /* FirebaseCrashlytics */; };
@@ -95,7 +94,6 @@
 				CFBAB9AC29B84A66006FDF8A /* Alamofire in Frameworks */,
 				CFAC547929ECCD8F0090510C /* FirebaseCrashlytics in Frameworks */,
 				CFAC547B29ECCD8F0090510C /* FirebasePerformance in Frameworks */,
-				CF919C4E29CB4D5F009A73FC /* SJDKitToolBox in Frameworks */,
 				CFAC547729ECCD8F0090510C /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,7 +292,6 @@
 			name = MyNews;
 			packageProductDependencies = (
 				CFBAB9AB29B84A66006FDF8A /* Alamofire */,
-				CF919C4D29CB4D5F009A73FC /* SJDKitToolBox */,
 				CFAC547629ECCD8F0090510C /* FirebaseAnalytics */,
 				CFAC547829ECCD8F0090510C /* FirebaseCrashlytics */,
 				CFAC547A29ECCD8F0090510C /* FirebasePerformance */,
@@ -353,7 +350,6 @@
 			mainGroup = CFBAB96929B8255A006FDF8A;
 			packageReferences = (
 				CFBAB9AA29B84A66006FDF8A /* XCRemoteSwiftPackageReference "Alamofire" */,
-				CF919C4C29CB4D5F009A73FC /* XCRemoteSwiftPackageReference "SJDKitToolBox" */,
 				CFAC547529ECCD8F0090510C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = CFBAB97329B8255A006FDF8A /* Products */;
@@ -655,9 +651,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.daguin-jsebastien.MyNewsTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyNews.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyNews";
 			};
 			name = Debug;
@@ -674,9 +673,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.daguin-jsebastien.MyNewsTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyNews.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyNews";
 			};
 			name = Release;
@@ -714,14 +716,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CF919C4C29CB4D5F009A73FC /* XCRemoteSwiftPackageReference "SJDKitToolBox" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Sebastien972-collab/SJDKitToolBox.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		CFAC547529ECCD8F0090510C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -741,11 +735,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CF919C4D29CB4D5F009A73FC /* SJDKitToolBox */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CF919C4C29CB4D5F009A73FC /* XCRemoteSwiftPackageReference "SJDKitToolBox" */;
-			productName = SJDKitToolBox;
-		};
 		CFAC547629ECCD8F0090510C /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CFAC547529ECCD8F0090510C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

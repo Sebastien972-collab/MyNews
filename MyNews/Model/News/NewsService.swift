@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SJDKitToolBox
 
 class NewsService {
     static var shared = NewsService()

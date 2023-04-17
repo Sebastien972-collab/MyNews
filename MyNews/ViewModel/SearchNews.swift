@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SJDKitToolBox
 
 class SearchNews: ObservableObject {
     static var preview = SearchNews(service: .shared )
@@ -27,7 +26,7 @@ class SearchNews: ObservableObject {
     
     func launchSearch() {
         inProgress = true
-        guard search.isNotEmpty else {
+        guard !search.isEmpty else {
             launchError(NewsError.invalidField)
             return
         }
@@ -74,7 +73,7 @@ class SearchNews: ObservableObject {
             return
         }
         let nextNews = addNews(news: news)
-        guard nextNews.isNotEmpty else {
+        guard !nextNews.isEmpty else {
             launchError(NewsError.noNewsFound)
             return
         }
