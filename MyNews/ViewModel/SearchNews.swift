@@ -84,6 +84,7 @@ class SearchNews: ObservableObject {
         inProgress = false 
         if page == 1 {
             self.isComplete = true
+            search.removeAll()
         }
         
     }

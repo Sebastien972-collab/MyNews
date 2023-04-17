@@ -18,6 +18,9 @@
 		CF919C4B29C8867B009A73FC /* NewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF919C4A29C8867B009A73FC /* NewsListView.swift */; };
 		CF919C4E29CB4D5F009A73FC /* SJDKitToolBox in Frameworks */ = {isa = PBXBuildFile; productRef = CF919C4D29CB4D5F009A73FC /* SJDKitToolBox */; };
 		CF919C5129CB4DBC009A73FC /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF919C5029CB4DBC009A73FC /* SafariView.swift */; };
+		CFAC547729ECCD8F0090510C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CFAC547629ECCD8F0090510C /* FirebaseAnalytics */; };
+		CFAC547929ECCD8F0090510C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = CFAC547829ECCD8F0090510C /* FirebaseCrashlytics */; };
+		CFAC547B29ECCD8F0090510C /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = CFAC547A29ECCD8F0090510C /* FirebasePerformance */; };
 		CFBAB97629B8255A006FDF8A /* MyNewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAB97529B8255A006FDF8A /* MyNewsApp.swift */; };
 		CFBAB97829B8255A006FDF8A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAB97729B8255A006FDF8A /* ContentView.swift */; };
 		CFBAB97A29B8255B006FDF8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBAB97929B8255B006FDF8A /* Assets.xcassets */; };
@@ -90,7 +93,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFBAB9AC29B84A66006FDF8A /* Alamofire in Frameworks */,
+				CFAC547929ECCD8F0090510C /* FirebaseCrashlytics in Frameworks */,
+				CFAC547B29ECCD8F0090510C /* FirebasePerformance in Frameworks */,
 				CF919C4E29CB4D5F009A73FC /* SJDKitToolBox in Frameworks */,
+				CFAC547729ECCD8F0090510C /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +128,15 @@
 				CF5EFE8E29B88EFB002598C3 /* NewsError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		CF80FEBC29ECD47E00F074EF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CFBAB97529B8255A006FDF8A /* MyNewsApp.swift */,
+				CFBAB97929B8255B006FDF8A /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		CF919C4F29CB4D91009A73FC /* News */ = {
@@ -157,11 +172,10 @@
 		CFBAB97429B8255A006FDF8A /* MyNews */ = {
 			isa = PBXGroup;
 			children = (
+				CF80FEBC29ECD47E00F074EF /* Supporting Files */,
 				CFBAB99F29B8256A006FDF8A /* Model */,
 				CFBAB9A029B82575006FDF8A /* View */,
 				CFBAB9A129B8257E006FDF8A /* ViewModel */,
-				CFBAB97529B8255A006FDF8A /* MyNewsApp.swift */,
-				CFBAB97929B8255B006FDF8A /* Assets.xcassets */,
 				CFBAB97B29B8255B006FDF8A /* Preview Content */,
 			);
 			path = MyNews;
@@ -281,6 +295,9 @@
 			packageProductDependencies = (
 				CFBAB9AB29B84A66006FDF8A /* Alamofire */,
 				CF919C4D29CB4D5F009A73FC /* SJDKitToolBox */,
+				CFAC547629ECCD8F0090510C /* FirebaseAnalytics */,
+				CFAC547829ECCD8F0090510C /* FirebaseCrashlytics */,
+				CFAC547A29ECCD8F0090510C /* FirebasePerformance */,
 			);
 			productName = MyNews;
 			productReference = CFBAB97229B8255A006FDF8A /* MyNews.app */;
@@ -337,6 +354,7 @@
 			packageReferences = (
 				CFBAB9AA29B84A66006FDF8A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CF919C4C29CB4D5F009A73FC /* XCRemoteSwiftPackageReference "SJDKitToolBox" */,
+				CFAC547529ECCD8F0090510C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = CFBAB97329B8255A006FDF8A /* Products */;
 			projectDirPath = "";
@@ -581,9 +599,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.daguin-jsebastien.MyNews";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -612,9 +633,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.daguin-jsebastien.MyNews";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -698,6 +722,14 @@
 				kind = branch;
 			};
 		};
+		CFAC547529ECCD8F0090510C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 		CFBAB9AA29B84A66006FDF8A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -713,6 +745,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF919C4C29CB4D5F009A73FC /* XCRemoteSwiftPackageReference "SJDKitToolBox" */;
 			productName = SJDKitToolBox;
+		};
+		CFAC547629ECCD8F0090510C /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFAC547529ECCD8F0090510C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		CFAC547829ECCD8F0090510C /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFAC547529ECCD8F0090510C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		CFAC547A29ECCD8F0090510C /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFAC547529ECCD8F0090510C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
 		};
 		CFBAB9AB29B84A66006FDF8A /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

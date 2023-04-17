@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DiscoverView: View {
-    @State private var allTheme = ["Politic", "Gaming", "Sport", "Education","Santé", "Monde", "Culture","Environnement", "Météo"]
+    @State private var allTheme = ["Politique", "Gaming", "Sport", "Education","Santé", "Monde", "Culture","Environnement", "Météo"]
     @State private var searchViewIsPresented = false
     @ObservedObject var searchNews: SearchNews = SearchNews(service: .shared)
     @FocusState private var fieldIsFocused : Bool
@@ -17,14 +17,21 @@ struct DiscoverView: View {
         NavigationStack {
             ScrollView(content: {
                 VStack {
-                    TextField("", text: $searchNews.search, prompt: Text("Theme to search"))
-                        .onSubmit {
-                            searchNews.launchSearch()
-                            searchNews.search.removeAll()
-                        }
-                        .submitLabel(.search)
-                        .focused($fieldIsFocused)
-                        .padding()
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .padding()
+                        TextField("", text: $searchNews.search, prompt: Text("Theme to search"))
+                            .padding(10)
+                            .onSubmit {
+                                searchNews.launchSearch()
+                                searchNews.search.removeAll()
+                            }
+                            .submitLabel(.search)
+                            .focused($fieldIsFocused)
+                    }
+                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray))
+                    .shadow(color: .gray, radius: 10)
+                    .padding()
                     
                     ForEach(filterTheme, id: \.self) { theme in
                         Button(action: {
