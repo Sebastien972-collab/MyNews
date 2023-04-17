@@ -10,8 +10,7 @@ import SwiftUI
 struct DiscoverView: View {
     @State private var allTheme = ["Politic", "Gaming", "Sport", "Education","Santé", "Monde", "Culture","Environnement", "Météo"]
     @State private var searchViewIsPresented = false
-    @ObservedObject var searchNews: SearchNews
-    @AppStorage("recentSearch") private var recentSearch = "Environnement"
+    @ObservedObject var searchNews: SearchNews = SearchNews(service: .shared)
     @FocusState private var fieldIsFocused : Bool
     
     var body: some View {
@@ -20,9 +19,8 @@ struct DiscoverView: View {
                 VStack {
                     TextField("", text: $searchNews.search, prompt: Text("Theme to search"))
                         .onSubmit {
-                            searchNews.launchSearch(nil)
+                            searchNews.launchSearch()
                             searchNews.search.removeAll()
-                            recentSearch = searchNews.search
                         }
                         .submitLabel(.search)
                         .focused($fieldIsFocused)
@@ -30,12 +28,13 @@ struct DiscoverView: View {
                     
                     ForEach(filterTheme, id: \.self) { theme in
                         Button(action: {
-                            searchNews.launchSearch(theme)
+                            searchNews.search = theme
+                            searchNews.launchSearch()
                         }, label: {
                             Text(theme)
                         })
                         .navigationDestination(isPresented: $searchNews.isComplete) {
-                            NewsListView(searchNews: searchNews, news: searchNews.news)
+                            NewsListView(searchNews: searchNews)
                         }
                     }
                 }
@@ -47,7 +46,7 @@ struct DiscoverView: View {
                 Button("Ok", role: .cancel) { }
             }
             .onAppear() {
-                searchNews.page = 1
+                searchNews.resetPage()
             }
             .navigationTitle(Text("Discover"))
             
@@ -65,7 +64,7 @@ struct DiscoverView: View {
 struct DiscoverView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            DiscoverView(searchNews: .shared)
+            DiscoverView(searchNews: .preview)
         }
     }
 }

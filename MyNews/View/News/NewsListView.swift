@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct NewsListView: View {
-    
     @ObservedObject var searchNews: SearchNews
-    var news: [Article]
     var body: some View {
         VStack {
             ScrollView {
                 VStack {
-                    ForEach(news, id: \.self) { news in
+                    ForEach(searchNews.news, id: \.self) { news in
                         NavigationLink {
                             NewsDetailView(article: news)
                         } label: {
@@ -26,16 +24,27 @@ struct NewsListView: View {
                 .padding()
                 .navigationTitle(Text("Search"))
             }
-            Button {
-                searchNews.nextPage()
-            } label: {
-                Text("Charger plus")
-                    .padding()
-            }
+            ZStack(content: {
+                if searchNews.inProgress {
+                    VStack {
+                        ProgressView {
+                            Text("Chargement en cours ")
+                        }
+                    }
+                } else {
+                    Button {
+                        searchNews.nextPage()
+                    } label: {
+                        Text("Charger plus")
+                            .padding()
+                    }
+                }
+               
+            })
             .alert(searchNews.newsError.localizedDescription, isPresented: $searchNews.showError) {
                 Button("Ok", role: .cancel) { }
             }
-
+            
         }
     }
 }
@@ -43,7 +52,7 @@ struct NewsListView: View {
 struct NexsListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            NewsListView(searchNews: .shared, news: [.preview, .preview, .preview, .preview, .preview, .preview])
+            NewsListView(searchNews: .preview)
         }
     }
 }

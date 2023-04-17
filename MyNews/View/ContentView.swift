@@ -12,15 +12,15 @@ struct ContentView: View {
         case home, dicover
     }
     @State private var selection = Selection.home
-    @StateObject private var searchNews = SearchNews.shared
+    @StateObject private var searchNews = SearchNews(service: .shared)
     var body: some View {
         TabView(selection: $selection) {
-            HomeView(searchNews: searchNews)
+            HomeView()
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
                 .tag(Selection.home)
-            DiscoverView(searchNews: searchNews)
+            DiscoverView()
                 .tabItem {
                     Label("Discover", systemImage: "network")
                 }

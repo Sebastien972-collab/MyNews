@@ -11,7 +11,7 @@ import XCTest
 final class MyNewsServiceTest: XCTestCase {
     func testGetAcorrectResponse() {
         let newsSession = NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData) )
-        let newsService = NewsService(recipeSession: newsSession)
+        let newsService = NewsService(session: newsSession)
         let expectation = XCTestExpectation(description: "Wait for queue change")
 
         newsService.launchSearch(search: "", page: 1) { success , article, error in
@@ -24,7 +24,7 @@ final class MyNewsServiceTest: XCTestCase {
     }
     func testGetAIncorrectResponse() {
         let newsSession = NewsSessionFake(fakeResponse: Result.success(FakeResponseData.incorrectData) )
-        let newsService = NewsService(recipeSession: newsSession)
+        let newsService = NewsService(session: newsSession)
         let expectation = XCTestExpectation(description: "Wait for queue change")
 
         newsService.launchSearch(search: "", page: 1) { success , article, error in
@@ -38,7 +38,7 @@ final class MyNewsServiceTest: XCTestCase {
 
     func testGetASuccessRequestButAIncorrectDataResponse() {
         let newsSession = NewsSessionFake(fakeResponse: Result.success(FakeResponseData.incorrectData))
-        let newsService = NewsService(recipeSession: newsSession)
+        let newsService = NewsService(session: newsSession)
         newsService.launchSearch(search : "", page: 1) { success, article, error in
             XCTAssertFalse(success)
             XCTAssertNil(article)
@@ -48,7 +48,7 @@ final class MyNewsServiceTest: XCTestCase {
 
     func testGetAResultFailure() {
         let newsSession = NewsSessionFake(fakeResponse: Result.failure(FakeResponseData.responseError))
-        let newsService = NewsService(recipeSession: newsSession)
+        let newsService = NewsService(session: newsSession)
 
         newsService.launchSearch(search: "", page: 1) { success, article, error in
             XCTAssertFalse(success)
@@ -59,7 +59,7 @@ final class MyNewsServiceTest: XCTestCase {
 
     func testFirstArticle() {
         let newsSession = NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData) )
-        let newsService = NewsService(recipeSession: newsSession)
+        let newsService = NewsService(session: newsSession)
 
         newsService.launchSearch(search: "", page: 1) { success , article, error in
 

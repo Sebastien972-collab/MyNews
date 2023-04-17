@@ -10,22 +10,17 @@ import Alamofire
 @testable import MyNews
 
 final class SearchNewsTest: XCTestCase {
-    var searchNews = SearchNews(service: NewsService(recipeSession: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData))))
+    var searchNews = SearchNews(service: NewsService(session: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData))))
     
     func testSearchFieldEmpty() {
         searchNews.search = ""
-        searchNews.launchSearch(nil)
-        XCTAssertEqual(searchNews.newsError as! NewsError, NewsError.invalidField)
-    }
-    func testUserNotEnterThemeToSearch()  {
-        searchNews.search = "Superman"
-        searchNews.launchSearch("")
+        searchNews.launchSearch()
         XCTAssertEqual(searchNews.newsError as! NewsError, NewsError.invalidField)
     }
     func testUserEnterAValidRecherche()  {
         searchNews.news.removeAll()
         searchNews.search = "49.3"
-        searchNews.launchSearch(nil)
+        searchNews.launchSearch()
         XCTAssertTrue(searchNews.news.isNotEmpty)
         
     }
@@ -43,19 +38,27 @@ final class SearchNewsTest: XCTestCase {
     }
     
     func testGivenAResponseWithDataIncorrect() {
-        let newSearchNews = SearchNews(service: NewsService(recipeSession: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.incorrectData))))
+        let newSearchNews = SearchNews(service: NewsService(session: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.incorrectData))))
         
-        newSearchNews.launchSearch(nil)
+        newSearchNews.launchSearch()
         XCTAssertTrue(newSearchNews.news.isEmpty)
         XCTAssertNotEqual(newSearchNews.newsError as! NewsError, NewsError.uknowError)
         XCTAssertTrue(newSearchNews.showError)
     }
     
     func testGivenAResponseFailure() {
-        let newSearchNews = SearchNews(service: NewsService(recipeSession: NewsSessionFake(fakeResponse: Result.failure(FakeResponseData.responseError))))
+        let newSearchNews = SearchNews(service: NewsService(session: NewsSessionFake(fakeResponse: Result.failure(FakeResponseData.responseError))))
         
-        newSearchNews.launchSearch("")
+        newSearchNews.launchSearch()
         XCTAssertNotEqual(newSearchNews.newsError as! NewsError, NewsError.uknowError)
         XCTAssertTrue(newSearchNews.showError)
+    }
+    
+    func testResetPage() {
+        searchNews.nextPage()
+        searchNews.nextPage()
+        searchNews.resetPage()
+        
+        XCTAssertEqual(searchNews.page, 1)
     }
 }

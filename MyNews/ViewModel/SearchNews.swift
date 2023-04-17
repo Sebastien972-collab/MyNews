@@ -9,57 +9,35 @@ import Foundation
 import SJDKitToolBox
 
 class SearchNews: ObservableObject {
-    static var shared = SearchNews()
-    private init(){}
-    @Published var search: String = ""
+    static var preview = SearchNews(service: .shared )
     private var previousResearch: String = ""
-    @Published var breakingNews: [Article] = []
-    private var isBreakingNews = false
+    @Published var search: String = ""
     @Published var news: [Article] = []
     @Published var newsError: Error = NewsError.uknowError
     @Published var showError : Bool = false
     @Published var inProgress : Bool = false
     @Published var isComplete : Bool = false
     @Published var page : Int = 1
-    private var service: NewsService = NewsService.shared
+     var service: NewsService = NewsService.shared
     
     
     init(service: NewsService) {
         self.service = service
     }
     
-    func getBreakingNews() {
-        self.isBreakingNews = true
-        service.getNews(callback: handle)
-    }
-    func launchSearch(_ theme: String?) {
-        print("Launch search")
-        print(search)
-        
-        guard theme != nil || search.isNotEmpty else {
-            newsError = NewsError.invalidField
-            showError.toggle()
+    func launchSearch() {
+        inProgress = true
+        guard search.isNotEmpty else {
+            launchError(NewsError.invalidField)
             return
         }
+        news.removeAll()
         previousResearch = search
-        if let theme = theme {
-            guard theme.isNotEmpty else {
-                launchError(NewsError.invalidField)
-                return
-            }
-            previousResearch = theme
-            service.launchSearch(search: theme, page: page, callback: handle)
-        } else {
-            previousResearch = search
-            service.launchSearch(search: search, page: page, callback: handle)
-        }
-        
-        if page < 2 {
-            self.isComplete.toggle()
-        }
+        service.launchSearch(search: search, page: page, callback: handle)
     }
     
     func nextPage() {
+        inProgress = true
         print("Next page de la recherche = \(previousResearch)")
         guard page < 10 else {
             launchError(NewsError.pageLimit)
@@ -67,13 +45,8 @@ class SearchNews: ObservableObject {
             return
         }
         page += 1
-        launchSearch(previousResearch)
-        
-    }
-    
-    private func launchError(_ error: Error) {
-        newsError = error
-        showError = true
+        service.launchSearch(search: previousResearch, page: page, callback: handle)
+        print("Nombre d'element dans news \(news.count)")
     }
     
     func addNews(news: [Article]) -> [Article] {
@@ -85,29 +58,33 @@ class SearchNews: ObservableObject {
         }
         return newsToReturn
     }
-    private func handle(success: Bool, news: [Article]?, error: Error?) {
+    
+    func resetPage() {
+        page = 1
+    }
+     func launchError(_ error: Error) {
+        newsError = error
+        showError = true
+        inProgress = true
+    }
+
+    func handle(success: Bool, news: [Article]?, error: Error?) {
         guard success, let news = news, error == nil else {
             launchError(error ?? NewsError.uknowError)
             return
         }
-        
-        guard !news.isEmpty else {
+        let nextNews = addNews(news: news)
+        guard nextNews.isNotEmpty else {
             launchError(NewsError.noNewsFound)
             return
         }
+        for new in nextNews {
+            self.news.append(new)
+        }
+        inProgress = false 
         if page == 1 {
-            self.news.removeAll()
+            self.isComplete = true
         }
-        if isBreakingNews {
-            self.breakingNews = addNews(news: news)
-            self.isBreakingNews = false
-        } else {
-            self.news = addNews(news: news)
-        }
-        guard news.isNotEmpty else {
-            launchError(NewsError.noNewsFound)
-            return
-        }
-        self.inProgress.toggle()
+        
     }
 }

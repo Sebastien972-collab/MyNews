@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var searchNews: SearchNews
+    @ObservedObject var searchNews = HomeVM(service: .shared)
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading) {
@@ -40,7 +40,7 @@ struct HomeView: View {
             .onAppear(){
                 if searchNews.breakingNews.isEmpty || searchNews.news.isEmpty {
                     searchNews.getBreakingNews()
-                    searchNews.launchSearch("recommandation")
+                    searchNews.launchSearch()
                 }
             }
             .alert(searchNews.newsError.localizedDescription, isPresented: $searchNews.showError) {
@@ -54,7 +54,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            HomeView(searchNews: SearchNews.shared)
+            HomeView()
         }
     }
 }

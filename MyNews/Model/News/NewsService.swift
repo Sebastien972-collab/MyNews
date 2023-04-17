@@ -13,17 +13,8 @@ class NewsService {
     private init(){}
     private var newsSession: NewsSession = NewsSession()
     
-    init(recipeSession: NewsSession) {
-        self.newsSession = recipeSession
-        
-    }
-    
-    func getNews(callback: @escaping (Bool, [Article]?, Error?) -> Void)  {
-        let baseUrl = URL(string: "https://newsapi.org/v2/everything?q=france&apiKey=c20fd58be9174ab5941ec7a08eeb88df&language=fr&page=1&pageSize=5")!
-        print(baseUrl)
-        launchSession(baseUrl: baseUrl) { success, news, error in
-            callback(success, news, error)
-        }
+    init(session: NewsSession) {
+        self.newsSession = session
         
     }
     func launchSearch(search: String, page: Int, callback: @escaping (Bool, [Article]?, Error?) -> Void)  {
