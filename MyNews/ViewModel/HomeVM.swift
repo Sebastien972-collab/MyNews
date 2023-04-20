@@ -26,5 +26,6 @@ class HomeVM: SearchNews {
     override func launchSearch() {
         search = "recommandation"
         super.launchSearch()
+        nextPage()
     }
 }
