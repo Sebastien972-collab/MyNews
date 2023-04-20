@@ -6,7 +6,6 @@
 //
 
 import XCTest
-import SJDKitToolBox
 @testable import MyNews
 
 final class HomeVMTest: XCTestCase {
@@ -14,7 +13,7 @@ final class HomeVMTest: XCTestCase {
     
     func testGetBreakingNews() {
         homeVm.getBreakingNews()
-        XCTAssertTrue(homeVm.breakingNews.isNotEmpty)
+        XCTAssertFalse(homeVm.breakingNews.isEmpty)
         
     }
     

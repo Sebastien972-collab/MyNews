@@ -17,9 +17,6 @@
 		CF5EFE9129C008AF002598C3 /* NewsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5EFE9029C008AF002598C3 /* NewsDetailView.swift */; };
 		CF919C4B29C8867B009A73FC /* NewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF919C4A29C8867B009A73FC /* NewsListView.swift */; };
 		CF919C5129CB4DBC009A73FC /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF919C5029CB4DBC009A73FC /* SafariView.swift */; };
-		CFAC547729ECCD8F0090510C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CFAC547629ECCD8F0090510C /* FirebaseAnalytics */; };
-		CFAC547929ECCD8F0090510C /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = CFAC547829ECCD8F0090510C /* FirebaseCrashlytics */; };
-		CFAC547B29ECCD8F0090510C /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = CFAC547A29ECCD8F0090510C /* FirebasePerformance */; };
 		CFBAB97629B8255A006FDF8A /* MyNewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAB97529B8255A006FDF8A /* MyNewsApp.swift */; };
 		CFBAB97829B8255A006FDF8A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAB97729B8255A006FDF8A /* ContentView.swift */; };
 		CFBAB97A29B8255B006FDF8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBAB97929B8255B006FDF8A /* Assets.xcassets */; };
@@ -31,6 +28,12 @@
 		CFBAB9AC29B84A66006FDF8A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CFBAB9AB29B84A66006FDF8A /* Alamofire */; };
 		CFBAB9AF29B84C85006FDF8A /* NewsSesssion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAB9AE29B84C85006FDF8A /* NewsSesssion.swift */; };
 		CFBAB9B229B85B2C006FDF8A /* HomeImageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAB9B129B85B2C006FDF8A /* HomeImageBubble.swift */; };
+		CFC5FC8229F0B25700D00861 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CFC5FC8129F0B25700D00861 /* AppCenterAnalytics */; };
+		CFC5FC8429F0B25700D00861 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = CFC5FC8329F0B25700D00861 /* AppCenterCrashes */; };
+		CFC5FC8629F0B25700D00861 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = CFC5FC8529F0B25700D00861 /* AppCenterDistribute */; };
+		CFC5FC8829F0B74700D00861 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CFC5FC8729F0B74700D00861 /* AppCenterAnalytics */; };
+		CFC5FC8A29F0B74B00D00861 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = CFC5FC8929F0B74B00D00861 /* AppCenterCrashes */; };
+		CFC5FC8C29F0B75000D00861 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = CFC5FC8B29F0B75000D00861 /* AppCenterDistribute */; };
 		CFC9950629ECC83A001AB5E5 /* HomeVMTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9950529ECC83A001AB5E5 /* HomeVMTest.swift */; };
 		CFD4BCCA29E87F6900522D69 /* NewsSearchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4BCC929E87F6900522D69 /* NewsSearchTest.swift */; };
 		CFD4BCCC29E87FCC00522D69 /* NewsErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4BCCB29E87FCC00522D69 /* NewsErrorTest.swift */; };
@@ -91,10 +94,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFC5FC8629F0B25700D00861 /* AppCenterDistribute in Frameworks */,
+				CFC5FC8229F0B25700D00861 /* AppCenterAnalytics in Frameworks */,
+				CFC5FC8429F0B25700D00861 /* AppCenterCrashes in Frameworks */,
 				CFBAB9AC29B84A66006FDF8A /* Alamofire in Frameworks */,
-				CFAC547929ECCD8F0090510C /* FirebaseCrashlytics in Frameworks */,
-				CFAC547B29ECCD8F0090510C /* FirebasePerformance in Frameworks */,
-				CFAC547729ECCD8F0090510C /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +105,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFC5FC8829F0B74700D00861 /* AppCenterAnalytics in Frameworks */,
+				CFC5FC8A29F0B74B00D00861 /* AppCenterCrashes in Frameworks */,
+				CFC5FC8C29F0B75000D00861 /* AppCenterDistribute in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,7 +289,6 @@
 				CFBAB96E29B8255A006FDF8A /* Sources */,
 				CFBAB96F29B8255A006FDF8A /* Frameworks */,
 				CFBAB97029B8255A006FDF8A /* Resources */,
-				CFDEB80F29D315EB000A2D43 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -292,9 +297,9 @@
 			name = MyNews;
 			packageProductDependencies = (
 				CFBAB9AB29B84A66006FDF8A /* Alamofire */,
-				CFAC547629ECCD8F0090510C /* FirebaseAnalytics */,
-				CFAC547829ECCD8F0090510C /* FirebaseCrashlytics */,
-				CFAC547A29ECCD8F0090510C /* FirebasePerformance */,
+				CFC5FC8129F0B25700D00861 /* AppCenterAnalytics */,
+				CFC5FC8329F0B25700D00861 /* AppCenterCrashes */,
+				CFC5FC8529F0B25700D00861 /* AppCenterDistribute */,
 			);
 			productName = MyNews;
 			productReference = CFBAB97229B8255A006FDF8A /* MyNews.app */;
@@ -315,6 +320,9 @@
 			);
 			name = MyNewsTests;
 			packageProductDependencies = (
+				CFC5FC8729F0B74700D00861 /* AppCenterAnalytics */,
+				CFC5FC8929F0B74B00D00861 /* AppCenterCrashes */,
+				CFC5FC8B29F0B75000D00861 /* AppCenterDistribute */,
 			);
 			productName = MyNewsTests;
 			productReference = CFE6C58629E85C5D00CEF6D7 /* MyNewsTests.xctest */;
@@ -350,7 +358,7 @@
 			mainGroup = CFBAB96929B8255A006FDF8A;
 			packageReferences = (
 				CFBAB9AA29B84A66006FDF8A /* XCRemoteSwiftPackageReference "Alamofire" */,
-				CFAC547529ECCD8F0090510C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 			);
 			productRefGroup = CFBAB97329B8255A006FDF8A /* Products */;
 			projectDirPath = "";
@@ -383,28 +391,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		CFDEB80F29D315EB000A2D43 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CFBAB96E29B8255A006FDF8A /* Sources */ = {
@@ -716,14 +702,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CFAC547529ECCD8F0090510C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.0.0;
-			};
-		};
 		CFBAB9AA29B84A66006FDF8A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -732,28 +710,51 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CFAC547629ECCD8F0090510C /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFAC547529ECCD8F0090510C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		CFAC547829ECCD8F0090510C /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFAC547529ECCD8F0090510C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-		CFAC547A29ECCD8F0090510C /* FirebasePerformance */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFAC547529ECCD8F0090510C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebasePerformance;
-		};
 		CFBAB9AB29B84A66006FDF8A /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CFBAB9AA29B84A66006FDF8A /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		CFC5FC8129F0B25700D00861 /* AppCenterAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterAnalytics;
+		};
+		CFC5FC8329F0B25700D00861 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		CFC5FC8529F0B25700D00861 /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		CFC5FC8729F0B74700D00861 /* AppCenterAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterAnalytics;
+		};
+		CFC5FC8929F0B74B00D00861 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		CFC5FC8B29F0B75000D00861 /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

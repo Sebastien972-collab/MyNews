@@ -21,7 +21,7 @@ final class SearchNewsTest: XCTestCase {
         searchNews.news.removeAll()
         searchNews.search = "49.3"
         searchNews.launchSearch()
-        XCTAssertTrue(searchNews.news.isNotEmpty)
+        XCTAssertFalse(searchNews.news.isEmpty)
         
     }
     func testNextPageWithPage10() {

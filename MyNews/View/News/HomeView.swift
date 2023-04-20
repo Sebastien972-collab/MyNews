@@ -33,6 +33,10 @@ struct HomeView: View {
                             NewsRow(article: article)
                         }
                     }
+                    
+                    Button("Error") {
+                        fatalError("Erreur de test ")
+                    }
                 }
                 
                 Spacer()
