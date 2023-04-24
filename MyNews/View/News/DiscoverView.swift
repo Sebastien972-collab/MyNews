@@ -24,7 +24,6 @@ struct DiscoverView: View {
                             .padding(10)
                             .onSubmit {
                                 searchNews.launchSearch()
-                                searchNews.search.removeAll()
                             }
                             .submitLabel(.search)
                             .focused($fieldIsFocused)
@@ -40,9 +39,6 @@ struct DiscoverView: View {
                         }, label: {
                             Text(theme)
                         })
-                        .navigationDestination(isPresented: $searchNews.isComplete) {
-                            NewsListView(searchNews: searchNews)
-                        }
                     }
                 }
             })
@@ -54,6 +50,9 @@ struct DiscoverView: View {
             }
             .onAppear() {
                 searchNews.resetPage()
+            }
+            .navigationDestination(isPresented: $searchNews.isComplete) {
+                NewsListView(searchNews: searchNews)
             }
             .navigationTitle(Text("Discover"))
             
