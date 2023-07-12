@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var searchNews = HomeVM(service: .shared)
+    @EnvironmentObject var favoriteNewsManager:  FavoriteNewsManager
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading) {
@@ -16,7 +17,7 @@ struct HomeView: View {
                     ScrollView(.horizontal, showsIndicators: false, content: {
                         HStack {
                             ForEach(searchNews.breakingNews, id: \.self) { new in
-                                NavigationLink(destination: NewsDetailView(article: new)) {
+                                NavigationLink(destination: NewsDetailView(article: new, favoriteNewsVm: favoriteNewsManager)) {
                                     HomeImageBubble(article: new)
                                 }
                             }
@@ -29,7 +30,7 @@ struct HomeView: View {
                         .bold()
                     
                     ForEach(searchNews.news, id: \.self) { article in
-                        NavigationLink(destination: NewsDetailView(article: article)) {
+                        NavigationLink(destination: NewsDetailView(article: article, favoriteNewsVm: favoriteNewsManager)) {
                             NewsRow(article: article)
                         }
                     }

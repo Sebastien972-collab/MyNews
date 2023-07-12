@@ -7,8 +7,8 @@
 
 import Foundation
 
-class SearchNews: ObservableObject {
-    static var preview = SearchNews(service: .shared )
+class SearchNewsManager: ObservableObject {
+    static var preview = SearchNewsManager(service: .shared )
     private var previousResearch: String = ""
     @Published var search: String = ""
     @Published var news: [Article] = []
@@ -17,7 +17,7 @@ class SearchNews: ObservableObject {
     @Published var inProgress : Bool = false
     @Published var isComplete : Bool = false
     @Published var page : Int = 1
-     var service: NewsService = NewsService.shared
+    var service: NewsService = NewsService.shared
     
     
     init(service: NewsService) {

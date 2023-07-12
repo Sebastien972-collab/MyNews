@@ -10,7 +10,7 @@ import SwiftUI
 struct DiscoverView: View {
     @State private var allTheme = ["Politique", "Gaming", "Sport", "Education","Santé", "Monde", "Culture","Environnement", "Météo"]
     @State private var searchViewIsPresented = false
-    @ObservedObject var searchNews: SearchNews = SearchNews(service: .shared)
+    @ObservedObject var searchNews: SearchNewsManager = SearchNewsManager(service: .shared)
     @FocusState private var fieldIsFocused : Bool
     
     var body: some View {

@@ -10,7 +10,7 @@ import SwiftUI
 struct NewsDetailView: View {
     let article: Article
     @State private var safariViewIsPresented = false
-    
+    @StateObject var favoriteNewsVm = FavoriteNewsManager()
     var body: some View {
         VStack(alignment: .leading) {
             Text("\(article.source.name) ° \(article.publishedAt)")
@@ -38,6 +38,17 @@ struct NewsDetailView: View {
             }
         }
         .padding()
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    favoriteNewsVm.saveRecipe(article)
+                } label: {
+                    Image(systemName: "star.fill")
+                        .foregroundColor(favoriteNewsVm.isFavorite(article) ? .yellow : .gray)
+                }
+
+            }
+        })
         .fullScreenCover(isPresented: $safariViewIsPresented) {
             SafariView(url: article.url)
         }
@@ -47,6 +58,8 @@ struct NewsDetailView: View {
 
 struct NewsDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NewsDetailView(article: .preview)
+        NavigationStack {
+            NewsDetailView(article: .preview, favoriteNewsVm: FavoriteNewsManager())
+        }
     }
 }

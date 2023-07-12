@@ -9,10 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     enum Selection {
-        case home, dicover
+        case home, dicover, account, bookMark
     }
-    @State private var selection = Selection.home
-    @StateObject private var searchNews = SearchNews(service: .shared)
+    @State private var selection = Selection.dicover
+    @StateObject private var searchNews = SearchNewsManager(service: .shared)
+    @StateObject var favoriteNews = FavoriteNewsManager()
+    
     var body: some View {
         TabView(selection: $selection) {
             HomeView()
@@ -25,7 +27,18 @@ struct ContentView: View {
                     Label("Discover", systemImage: "network")
                 }
                 .tag(Selection.dicover)
+            BookMarkView()
+                .tabItem({
+                    Label("Bookmark", systemImage: "bookmark")
+                })
+                .tag(Selection.bookMark)
+//            Text("Account view")
+//                .tabItem({
+//                    Label("Account", systemImage: "person.fill")
+//                })
+//                .tag(Selection.account)
         }
+        .environmentObject(favoriteNews)
     }
 }
 

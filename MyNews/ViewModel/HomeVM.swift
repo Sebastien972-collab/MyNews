@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HomeVM: SearchNews {
+class HomeVM: SearchNewsManager {
     @Published var breakingNews: [Article] = []
     private var isBreakingNews = false
     

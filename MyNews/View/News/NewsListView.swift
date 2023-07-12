@@ -8,22 +8,10 @@
 import SwiftUI
 
 struct NewsListView: View {
-    @ObservedObject var searchNews: SearchNews
+    @ObservedObject var searchNews: SearchNewsManager
     var body: some View {
         VStack {
-            ScrollView {
-                VStack {
-                    ForEach(searchNews.news, id: \.self) { news in
-                        NavigationLink {
-                            NewsDetailView(article: news)
-                        } label: {
-                            NewsRow(article: news)
-                        }
-                    }
-                }
-                .padding()
-                .navigationTitle(Text("Search"))
-            }
+            ListArticleView(newsManger: searchNews)
             ZStack(content: {
                 if searchNews.inProgress {
                     VStack {

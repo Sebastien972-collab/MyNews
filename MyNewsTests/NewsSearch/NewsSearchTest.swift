@@ -10,7 +10,7 @@ import Alamofire
 @testable import MyNews
 
 final class SearchNewsTest: XCTestCase {
-    var searchNews = SearchNews(service: NewsService(session: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData))))
+    var searchNews = SearchNewsManager(service: NewsService(session: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData))))
     
     func testSearchFieldEmpty() {
         searchNews.search = ""
@@ -38,7 +38,7 @@ final class SearchNewsTest: XCTestCase {
     }
     
     func testGivenAResponseWithDataIncorrect() {
-        let newSearchNews = SearchNews(service: NewsService(session: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.incorrectData))))
+        let newSearchNews = SearchNewsManager(service: NewsService(session: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.incorrectData))))
         
         newSearchNews.launchSearch()
         XCTAssertTrue(newSearchNews.news.isEmpty)
@@ -47,7 +47,7 @@ final class SearchNewsTest: XCTestCase {
     }
     
     func testGivenAResponseFailure() {
-        let newSearchNews = SearchNews(service: NewsService(session: NewsSessionFake(fakeResponse: Result.failure(FakeResponseData.responseError))))
+        let newSearchNews = SearchNewsManager(service: NewsService(session: NewsSessionFake(fakeResponse: Result.failure(FakeResponseData.responseError))))
         
         newSearchNews.launchSearch()
         XCTAssertNotEqual(newSearchNews.newsError as! NewsError, NewsError.uknowError)
