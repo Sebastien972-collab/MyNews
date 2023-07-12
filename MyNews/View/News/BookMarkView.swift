@@ -21,17 +21,6 @@ struct BookMarkView: View {
                         Text("Ok")
                     }
                 })
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            favoriteNewsVm.removeAll()
-                        } label: {
-                            Image(systemName: "trash")
-                        }
-
-                    }
-                }
-                
         }
     }
 }
