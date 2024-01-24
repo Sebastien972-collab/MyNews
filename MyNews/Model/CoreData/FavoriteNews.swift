@@ -39,12 +39,16 @@ class FavoriteNews {
     }
 
     func checkElementIsFavorite(article newArticle: Article) -> Bool {
-        for article in all {
-            if  newArticle == article {
-                return true
-            }
-        }
-        return false
+//        for article in all {
+//            if  newArticle.id == article.id {
+//                return true
+//            }
+//        }
+//        return false
+        
+        return !all.filter {
+            $0.id == newArticle.id
+        }.isEmpty
     }
     ///This function remove a existing recipe
      func removeElementInFavorite(article articleToRemove : Article) throws {
@@ -86,7 +90,7 @@ class FavoriteNews {
         case true :
             do {
                 try removeElementInFavorite(article: article)
-                print("<------------------Article removed------------------>")
+                print("\(article.title) is removed with success ")
 
             } catch {
                 throw error
@@ -95,7 +99,7 @@ class FavoriteNews {
         case false :
             do {
                 try addNewArticleFavorite(article: article)
-
+                print("\(article.title) is added with success ")
             } catch {
                 throw error
             }

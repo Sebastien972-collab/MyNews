@@ -14,6 +14,10 @@ class FavoriteNewsManager: SearchNewsManager {
         super.init(service: .shared)
          refresh()
     }
+    init(service: NewsService, favoriteNews: FavoriteNews) {
+        super.init(service: service)
+        self.favoriteNews = favoriteNews
+    }
     
     func saveRecipe(_ article: Article) {
         do {
@@ -24,17 +28,10 @@ class FavoriteNewsManager: SearchNewsManager {
             showError.toggle()
         }
     }
-    func removeAll() {
-        do {
-            try favoriteNews.removeAll()
-            refresh()
-        } catch  {
-            newsError = error
-            showError.toggle()
-        }
-    }
     func isFavorite(_ article: Article) -> Bool {
-        news.contains(article)
+        return !news.filter {
+            $0.id == article.id
+        }.isEmpty
     }
     
     func refresh() {

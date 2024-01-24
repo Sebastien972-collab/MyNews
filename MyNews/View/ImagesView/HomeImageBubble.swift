@@ -26,18 +26,18 @@ struct HomeImageBubble: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
             }
-
-            HStack {
-                VStack(alignment: .leading, spacing: 5) {
-                    Spacer()
-                    Text(article.source.name)
-                    Text(article.description)
-                        .lineLimit(2)
-                }
-                .foregroundColor(.white)
+            
+            VStack(alignment: .leading, spacing: 5) {
                 Spacer()
+                Text(article.source.name)
+                Text(article.description)
+                    .lineLimit(2)
             }
+            .multilineTextAlignment(.leading)
+            .foregroundColor(.white)
+            .shadow(color: .black, radius: 10)
             .padding()
+
         }
         .frame(width: 350, height: 200)
         .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black))

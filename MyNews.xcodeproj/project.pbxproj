@@ -14,6 +14,7 @@
 		6306E4B12A5C996400FB01D8 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6306E4B02A5C996400FB01D8 /* PersistenceController.swift */; };
 		6306E4B32A5C99CB00FB01D8 /* FavoriteNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6306E4B22A5C99CB00FB01D8 /* FavoriteNews.swift */; };
 		63136BBF2A539EC700D58588 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63136BBE2A539EC700D58588 /* User.swift */; };
+		63DFE9342B5FBCFA003009C1 /* FavoriteNewsManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DFE9332B5FBCFA003009C1 /* FavoriteNewsManagerTest.swift */; };
 		CF022DE829E85FA0008B5890 /* MyNewsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF022DE729E85FA0008B5890 /* MyNewsServiceTests.swift */; };
 		CF022DEA29E8609D008B5890 /* NewsSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF022DE929E8609D008B5890 /* NewsSessionFake.swift */; };
 		CF49455D29C016B700558ABA /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF49455C29C016B700558ABA /* DiscoverView.swift */; };
@@ -35,12 +36,6 @@
 		CFBAB9AC29B84A66006FDF8A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CFBAB9AB29B84A66006FDF8A /* Alamofire */; };
 		CFBAB9AF29B84C85006FDF8A /* NewsSesssion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAB9AE29B84C85006FDF8A /* NewsSesssion.swift */; };
 		CFBAB9B229B85B2C006FDF8A /* HomeImageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBAB9B129B85B2C006FDF8A /* HomeImageBubble.swift */; };
-		CFC5FC8229F0B25700D00861 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CFC5FC8129F0B25700D00861 /* AppCenterAnalytics */; };
-		CFC5FC8429F0B25700D00861 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = CFC5FC8329F0B25700D00861 /* AppCenterCrashes */; };
-		CFC5FC8629F0B25700D00861 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = CFC5FC8529F0B25700D00861 /* AppCenterDistribute */; };
-		CFC5FC8829F0B74700D00861 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CFC5FC8729F0B74700D00861 /* AppCenterAnalytics */; };
-		CFC5FC8A29F0B74B00D00861 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = CFC5FC8929F0B74B00D00861 /* AppCenterCrashes */; };
-		CFC5FC8C29F0B75000D00861 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = CFC5FC8B29F0B75000D00861 /* AppCenterDistribute */; };
 		CFC9950629ECC83A001AB5E5 /* HomeVMTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9950529ECC83A001AB5E5 /* HomeVMTest.swift */; };
 		CFD4BCCA29E87F6900522D69 /* NewsSearchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4BCC929E87F6900522D69 /* NewsSearchTest.swift */; };
 		CFD4BCCC29E87FCC00522D69 /* NewsErrorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD4BCCB29E87FCC00522D69 /* NewsErrorTest.swift */; };
@@ -69,6 +64,7 @@
 		6306E4B02A5C996400FB01D8 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		6306E4B22A5C99CB00FB01D8 /* FavoriteNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNews.swift; sourceTree = "<group>"; };
 		63136BBE2A539EC700D58588 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		63DFE9332B5FBCFA003009C1 /* FavoriteNewsManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNewsManagerTest.swift; sourceTree = "<group>"; };
 		CF022DE729E85FA0008B5890 /* MyNewsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNewsServiceTests.swift; sourceTree = "<group>"; };
 		CF022DE929E8609D008B5890 /* NewsSessionFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSessionFake.swift; sourceTree = "<group>"; };
 		CF49455C29C016B700558ABA /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
@@ -106,9 +102,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFC5FC8629F0B25700D00861 /* AppCenterDistribute in Frameworks */,
-				CFC5FC8229F0B25700D00861 /* AppCenterAnalytics in Frameworks */,
-				CFC5FC8429F0B25700D00861 /* AppCenterCrashes in Frameworks */,
 				CFBAB9AC29B84A66006FDF8A /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,9 +110,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFC5FC8829F0B74700D00861 /* AppCenterAnalytics in Frameworks */,
-				CFC5FC8A29F0B74B00D00861 /* AppCenterCrashes in Frameworks */,
-				CFC5FC8C29F0B75000D00861 /* AppCenterDistribute in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +263,7 @@
 				CFD4BCC929E87F6900522D69 /* NewsSearchTest.swift */,
 				CFD4BCCB29E87FCC00522D69 /* NewsErrorTest.swift */,
 				CFC9950529ECC83A001AB5E5 /* HomeVMTest.swift */,
+				63DFE9332B5FBCFA003009C1 /* FavoriteNewsManagerTest.swift */,
 			);
 			path = NewsSearch;
 			sourceTree = "<group>";
@@ -323,9 +314,6 @@
 			name = MyNews;
 			packageProductDependencies = (
 				CFBAB9AB29B84A66006FDF8A /* Alamofire */,
-				CFC5FC8129F0B25700D00861 /* AppCenterAnalytics */,
-				CFC5FC8329F0B25700D00861 /* AppCenterCrashes */,
-				CFC5FC8529F0B25700D00861 /* AppCenterDistribute */,
 			);
 			productName = MyNews;
 			productReference = CFBAB97229B8255A006FDF8A /* MyNews.app */;
@@ -346,9 +334,6 @@
 			);
 			name = MyNewsTests;
 			packageProductDependencies = (
-				CFC5FC8729F0B74700D00861 /* AppCenterAnalytics */,
-				CFC5FC8929F0B74B00D00861 /* AppCenterCrashes */,
-				CFC5FC8B29F0B75000D00861 /* AppCenterDistribute */,
 			);
 			productName = MyNewsTests;
 			productReference = CFE6C58629E85C5D00CEF6D7 /* MyNewsTests.xctest */;
@@ -362,7 +347,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					CFBAB97129B8255A006FDF8A = {
 						CreatedOnToolsVersion = 14.2;
@@ -384,7 +369,6 @@
 			mainGroup = CFBAB96929B8255A006FDF8A;
 			packageReferences = (
 				CFBAB9AA29B84A66006FDF8A /* XCRemoteSwiftPackageReference "Alamofire" */,
-				CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 			);
 			productRefGroup = CFBAB97329B8255A006FDF8A /* Products */;
 			projectDirPath = "";
@@ -459,6 +443,7 @@
 				CF022DE829E85FA0008B5890 /* MyNewsServiceTests.swift in Sources */,
 				CF022DEA29E8609D008B5890 /* NewsSessionFake.swift in Sources */,
 				CFE6C59D29E85F6000CEF6D7 /* FakeResponseData.swift in Sources */,
+				63DFE9342B5FBCFA003009C1 /* FavoriteNewsManagerTest.swift in Sources */,
 				CFD4BCCA29E87F6900522D69 /* NewsSearchTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,6 +495,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -570,6 +556,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -742,14 +729,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -757,36 +736,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CFBAB9AA29B84A66006FDF8A /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		CFC5FC8129F0B25700D00861 /* AppCenterAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterAnalytics;
-		};
-		CFC5FC8329F0B25700D00861 /* AppCenterCrashes */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
-		};
-		CFC5FC8529F0B25700D00861 /* AppCenterDistribute */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterDistribute;
-		};
-		CFC5FC8729F0B74700D00861 /* AppCenterAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterAnalytics;
-		};
-		CFC5FC8929F0B74B00D00861 /* AppCenterCrashes */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
-		};
-		CFC5FC8B29F0B75000D00861 /* AppCenterDistribute */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFC5FC8029F0B25700D00861 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterDistribute;
 		};
 /* End XCSwiftPackageProductDependency section */
 

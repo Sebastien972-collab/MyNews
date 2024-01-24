@@ -9,7 +9,7 @@ import Foundation
 
 class SearchNewsManager: ObservableObject {
     static var preview = SearchNewsManager(service: .shared )
-    private var previousResearch: String = ""
+    var previousResearch: String = ""
     @Published var search: String = ""
     @Published var news: [Article] = []
     @Published var newsError: Error = NewsError.uknowError

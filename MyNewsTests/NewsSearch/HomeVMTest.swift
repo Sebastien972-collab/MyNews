@@ -22,5 +22,11 @@ final class HomeVMTest: XCTestCase {
         
         XCTAssertEqual(newHomeView.newsError as! NewsError, NewsError.uknowError )
     }
-
+    
+    func testLaunch() {
+        homeVm.previousResearch.removeAll()
+        homeVm.launchSearch()
+        XCTAssertTrue(homeVm.previousResearch == "recommandation")
+        XCTAssertFalse(homeVm.news.isEmpty)
+    }
 }

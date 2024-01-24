@@ -30,10 +30,11 @@ struct NewsRow: View {
                     .font(.headline)
                     .bold()
                     .padding(.vertical)
-                Text(article.publishedAt)
+                Text(article.dateFr)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
+            .multilineTextAlignment(.leading)
             Spacer()
                 
         }

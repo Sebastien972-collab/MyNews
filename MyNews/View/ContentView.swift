@@ -28,15 +28,10 @@ struct ContentView: View {
                 }
                 .tag(Selection.dicover)
             BookMarkView()
-                .tabItem({
+                .tabItem {
                     Label("Bookmark", systemImage: "bookmark")
-                })
+                }
                 .tag(Selection.bookMark)
-//            Text("Account view")
-//                .tabItem({
-//                    Label("Account", systemImage: "person.fill")
-//                })
-//                .tag(Selection.account)
         }
         .environmentObject(favoriteNews)
     }
