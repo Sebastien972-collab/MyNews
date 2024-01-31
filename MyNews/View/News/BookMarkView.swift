@@ -9,13 +9,9 @@ import SwiftUI
 
 struct BookMarkView: View {
     @EnvironmentObject var favoriteNewsVm: FavoriteNewsManager
-    
     var body: some View {
         NavigationStack {
             ListArticleView(newsManger: favoriteNewsVm)
-                .onAppear() {
-                    favoriteNewsVm.refresh()
-                }
                 .alert(favoriteNewsVm.newsError.localizedDescription, isPresented: $favoriteNewsVm.showError, actions: {
                     Button(role: .cancel, action: {}) {
                         Text("Ok")

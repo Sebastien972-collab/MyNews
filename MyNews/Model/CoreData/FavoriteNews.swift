@@ -39,22 +39,19 @@ class FavoriteNews {
     }
 
     func checkElementIsFavorite(article newArticle: Article) -> Bool {
-//        for article in all {
-//            if  newArticle.id == article.id {
-//                return true
-//            }
-//        }
-//        return false
-        
-        return !all.filter {
-            $0.id == newArticle.id
-        }.isEmpty
+        for article in all {
+            if  newArticle.id == article.id {
+                return true
+            }
+        }
+       return false
     }
     ///This function remove a existing recipe
      func removeElementInFavorite(article articleToRemove : Article) throws {
         for (index ,article) in all.enumerated() {
-            if article == articleToRemove {
+            if article.id == articleToRemove.id {
                 viewContext.delete(cdArticles[index])
+                
                 do {
                     try viewContext.save()
                 }
@@ -63,9 +60,6 @@ class FavoriteNews {
                 }
             }
         }
-    }
-    
-    func removeAll() throws {
     }
     private func addNewArticleFavorite(article : Article) throws {
         let articleFav = CDArticles(context: viewContext)

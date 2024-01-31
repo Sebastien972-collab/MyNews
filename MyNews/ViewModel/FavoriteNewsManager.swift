@@ -8,7 +8,7 @@
 import Foundation
 
 class FavoriteNewsManager: SearchNewsManager {
-    @Published var favoriteNews = FavoriteNews.shared
+     var favoriteNews = FavoriteNews.shared
     
     init() {
         super.init(service: .shared)

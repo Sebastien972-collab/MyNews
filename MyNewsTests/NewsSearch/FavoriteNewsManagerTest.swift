@@ -10,27 +10,35 @@ import XCTest
 
 final class FavoriteNewsManagerTest: XCTestCase {
     
-    var favoriteNews: FavoriteNewsManager!
+    var favoriteNewsManager: FavoriteNewsManager!
     
     
     override func setUp() {
         super.setUp()
-        favoriteNews = FavoriteNewsManager(service: NewsService(session: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData))), favoriteNews: FavoriteNews(persistenceController: PersistenceController(inMemory: true)))
+        favoriteNewsManager = FavoriteNewsManager(service: NewsService(session: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData))), favoriteNews: FavoriteNews(persistenceController: PersistenceController(inMemory: true)))
     }
     
     func test() {
-        XCTAssertTrue(favoriteNews.news.isEmpty)
+        XCTAssertTrue(favoriteNewsManager.news.isEmpty)
     }
     func testGivenAArticleToSave() {
-        favoriteNews.saveRecipe(Article.preview)
-        XCTAssertFalse(favoriteNews.news.isEmpty)
-        print("Le nombre de news est \(favoriteNews.news.count)")
-        XCTAssertTrue(favoriteNews.news[0].title == Article.preview.title)
+        favoriteNewsManager.saveRecipe(Article.preview)
+        XCTAssertFalse(favoriteNewsManager.news.isEmpty)
+        print("Le nombre de news est \(favoriteNewsManager.news.count)")
+        XCTAssertTrue(favoriteNewsManager.news[0].title == Article.preview.title)
+    }
+    func testGivenAArticleSaved() {
+        favoriteNewsManager.saveRecipe(Article.preview)
+        XCTAssertFalse(favoriteNewsManager.news.isEmpty)
+        print("Le nombre de news est \(favoriteNewsManager.news.count)")
+        XCTAssertTrue(favoriteNewsManager.news[0].title == Article.preview.title)
+        favoriteNewsManager.saveRecipe(Article.preview)
+        XCTAssertTrue(favoriteNewsManager.news.isEmpty)
     }
     
     func testGivenAarticleSaveIfIsFavorite() {
-        favoriteNews.saveRecipe(.preview)
-        XCTAssert(favoriteNews.isFavorite(.preview))
+        favoriteNewsManager.saveRecipe(.preview)
+        XCTAssert(favoriteNewsManager.isFavorite(.preview))
     }
     
 }

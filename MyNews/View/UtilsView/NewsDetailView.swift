@@ -10,10 +10,10 @@ import SwiftUI
 struct NewsDetailView: View {
     let article: Article
     @State private var safariViewIsPresented = false
-    @StateObject var favoriteNewsVm = FavoriteNewsManager()
+    @EnvironmentObject private var favoriteNewsVm:  FavoriteNewsManager
     var body: some View {
         VStack(alignment: .leading) {
-            Text("\(article.source.name) ° \(article.publishedAt)")
+            Text("\(article.source.name) ° \(article.dateFr)")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             Text(article.title)
@@ -59,7 +59,7 @@ struct NewsDetailView: View {
 struct NewsDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            NewsDetailView(article: .preview, favoriteNewsVm: FavoriteNewsManager())
+            NewsDetailView(article: .preview)
         }
     }
 }

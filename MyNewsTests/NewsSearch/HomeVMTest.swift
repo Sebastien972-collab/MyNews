@@ -9,7 +9,7 @@ import XCTest
 @testable import MyNews
 
 final class HomeVMTest: XCTestCase {
-    var homeVm = HomeVM(service: NewsService(session: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData))))
+    var homeVm = HomeViewManager(service: NewsService(session: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData))))
     
     func testGetBreakingNews() {
         homeVm.getBreakingNews()
@@ -18,7 +18,7 @@ final class HomeVMTest: XCTestCase {
     }
     
     func testGetAResponseError() {
-        let newHomeView = HomeVM(service: NewsService(session: NewsSessionFake(fakeResponse: Result.failure(FakeResponseData.responseError))))
+        let newHomeView = HomeViewManager(service: NewsService(session: NewsSessionFake(fakeResponse: Result.failure(FakeResponseData.responseError))))
         
         XCTAssertEqual(newHomeView.newsError as! NewsError, NewsError.uknowError )
     }

@@ -11,12 +11,13 @@ struct HomeImageBubble: View {
     var article: Article
     
     var body: some View {
-        ZStack {
+        VStack(spacing: 5) {
             if let url = article.urlToImage {
                 AsyncImage(url: URL(string: (url))) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
+                        
                 } placeholder: {
                     ProgressView()
                         .frame(width: 80, height: 80)
@@ -28,21 +29,20 @@ struct HomeImageBubble: View {
             }
             
             VStack(alignment: .leading, spacing: 5) {
-                Spacer()
                 Text(article.source.name)
                 Text(article.description)
+                    .multilineTextAlignment(.leading)
                     .lineLimit(2)
+                    .foregroundColor(.black)
+                    .bold()
             }
-            .multilineTextAlignment(.leading)
-            .foregroundColor(.white)
-            .shadow(color: .black, radius: 10)
-            .padding()
-
+            .padding(5)
+            
+            
         }
-        .frame(width: 350, height: 200)
-        .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.black))
-        .shadow(radius: 25)
-        .clipShape(RoundedRectangle(cornerRadius: 25))
+        .frame(width: 350, height: 350)
+        .clipShape(RoundedRectangle(cornerRadius: 15))
+        .clipped()
         
     }
 }

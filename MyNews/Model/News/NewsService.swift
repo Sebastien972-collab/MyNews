@@ -19,8 +19,8 @@ class NewsService {
     func launchSearch(search: String, page: Int, callback: @escaping (Bool, [Article]?, Error?) -> Void)  {
         let searchToUrl = search.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<BaseUrl>>>>>>>>>>>>>>>>>>>>>>>>")
-        print(search)
-        let baseUrl = URL(string: "https://newsapi.org/v2/everything?q=\(searchToUrl)&apiKey=c20fd58be9174ab5941ec7a08eeb88df&language=fr&page=\(page)&pageSize=10")!
+        let baseUrl = URL(string: "https://newsapi.org/v2/everything?q=\(searchToUrl)&apiKey=3c9b682448ef413499e57b61c45dfc9b&language=fr&page=\(page)&pageSize=10")!
+        print(baseUrl)
         launchSession(baseUrl: baseUrl) { success, news, error in
             callback(success, news, error)
         }

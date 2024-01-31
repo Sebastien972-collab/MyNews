@@ -8,29 +8,28 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var searchNews = HomeVM(service: .shared)
-    @EnvironmentObject var favoriteNewsManager:  FavoriteNewsManager
+    @StateObject private var searchNews = HomeViewManager(service: .shared)
     var body: some View {
         NavigationStack{
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 10) {
                 ScrollView(.vertical) {
                     ScrollView(.horizontal, showsIndicators: false, content: {
                         HStack {
                             ForEach(searchNews.breakingNews, id: \.self) { new in
-                                NavigationLink(destination: NewsDetailView(article: new, favoriteNewsVm: favoriteNewsManager)) {
+                                NavigationLink(destination: NewsDetailView(article: new)) {
                                     HomeImageBubble(article: new)
                                 }
                             }
                         }
                     })
                     .padding(.bottom)
-                    
+                    Divider()
                     Text("Recommendation")
                         .font(.title3)
                         .bold()
                     
                     ForEach(searchNews.news, id: \.self) { article in
-                        NavigationLink(destination: NewsDetailView(article: article, favoriteNewsVm: favoriteNewsManager)) {
+                        NavigationLink(destination: NewsDetailView(article: article)) {
                             NewsRow(article: article)
                         }
                     }
