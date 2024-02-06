@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NewsRow: View {
+    @Environment(\.colorScheme) var colorScheme
     var article: Article
     
     var body: some View {
@@ -28,6 +29,7 @@ struct NewsRow: View {
                     .foregroundColor(.secondary)
                 Text(article.title)
                     .font(.headline)
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
                     .bold()
                     .padding(.vertical)
                 Text(article.dateFr)

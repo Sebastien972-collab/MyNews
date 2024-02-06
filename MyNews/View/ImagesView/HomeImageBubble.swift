@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeImageBubble: View {
+    @Environment(\.colorScheme) var colorScheme
     var article: Article
     
     var body: some View {
@@ -33,7 +34,7 @@ struct HomeImageBubble: View {
                 Text(article.description)
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)
-                    .foregroundColor(.black)
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
                     .bold()
             }
             .padding(5)
