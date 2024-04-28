@@ -6,10 +6,43 @@
 //
 
 import SwiftUI
+import _AuthenticationServices_SwiftUI
 
 struct ConnectionView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Image("worldImage")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                Spacer()
+                Image("myNewsLogo")
+                    .resizable()
+                    .frame(width: 80, height: 80)
+                    .padding()
+                VStack(content: {
+                    SignInWithAppleButton(.continue) { asAuth in
+                    } onCompletion: { result in
+                    }
+                    .frame(maxWidth: 300, maxHeight: 60)
+                    .cornerRadius(25)
+                    
+                    Button(action: {}, label: {
+                        Text("Continuer avec mail")
+                            .frame(maxWidth: 300, maxHeight: 60)
+                            .background()
+                            .cornerRadius(25)
+                    })
+                })
+                Spacer()
+                Text("By: Sébastien DAGUIN INC")
+                    .foregroundStyle(.white)
+                    .bold()
+                    .italic()
+            }
+            
+        }
     }
 }
 

@@ -11,7 +11,7 @@ struct BookMarkView: View {
     @EnvironmentObject var favoriteNewsVm: FavoriteNewsManager
     var body: some View {
         NavigationStack {
-            ListArticleView(newsManger: favoriteNewsVm)
+            ListArticleView(newsManger: favoriteNewsVm, title: "BookMark")
                 .alert(favoriteNewsVm.newsError.localizedDescription, isPresented: $favoriteNewsVm.showError, actions: {
                     Button(role: .cancel, action: {}) {
                         Text("Ok")

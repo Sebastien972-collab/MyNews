@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var searchNews = HomeViewManager(service: .shared)
+    @State private var showView = false
     var body: some View {
         NavigationStack{
             VStack(alignment: .leading, spacing: 10) {
@@ -36,6 +37,8 @@ struct HomeView: View {
                 }
                 
                 Spacer()
+                
+                
             }
             .onAppear(){
                 if searchNews.breakingNews.isEmpty || searchNews.news.isEmpty {
@@ -48,7 +51,17 @@ struct HomeView: View {
             }
             .navigationTitle(Text("Breaking News"))
             .padding(8)
+            .toolbar(content: {
+                NavigationLink {
+                    BookMarkView()
+                } label: {
+                    Image(systemName: "bookmark.fill")       
+                }
+
+
+            })
         }
+        
     }
 }
 struct HomeView_Previews: PreviewProvider {

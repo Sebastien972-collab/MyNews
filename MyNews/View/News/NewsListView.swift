@@ -11,7 +11,7 @@ struct NewsListView: View {
     @ObservedObject var searchNews: SearchNewsManager
     var body: some View {
         VStack {
-            ListArticleView(newsManger: searchNews)
+            ListArticleView(newsManger: searchNews, title: "Search")
             ZStack(content: {
                 if searchNews.inProgress {
                     VStack {

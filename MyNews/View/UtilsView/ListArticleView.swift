@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ListArticleView: View {
     @ObservedObject var newsManger: SearchNewsManager
+    let title:  String
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -21,13 +23,13 @@ struct ListArticleView: View {
                 }
             }
             .padding()
-            .navigationTitle(Text("Search"))
+            .navigationTitle(Text(title))
         }
     }
 }
 
 struct ListArticleView_Previews: PreviewProvider {
     static var previews: some View {
-        ListArticleView(newsManger: SearchNewsManager(service: .shared))
+        ListArticleView(newsManger: SearchNewsManager(service: .shared), title: "Search")
     }
 }
