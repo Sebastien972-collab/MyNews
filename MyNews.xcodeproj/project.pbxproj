@@ -14,6 +14,7 @@
 		6306E4B12A5C996400FB01D8 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6306E4B02A5C996400FB01D8 /* PersistenceController.swift */; };
 		6306E4B32A5C99CB00FB01D8 /* FavoriteNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6306E4B22A5C99CB00FB01D8 /* FavoriteNews.swift */; };
 		63136BBF2A539EC700D58588 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63136BBE2A539EC700D58588 /* User.swift */; };
+		6376701D2BDE670F002BF380 /* SwiftyXMLParser in Frameworks */ = {isa = PBXBuildFile; productRef = 6376701C2BDE670F002BF380 /* SwiftyXMLParser */; };
 		638EB4982BB69CAA00ED1736 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638EB4972BB69CAA00ED1736 /* ConnectionView.swift */; };
 		63976B5E2B60E93D00F847EE /* FavoriteNewsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63976B5D2B60E93D00F847EE /* FavoriteNewsTest.swift */; };
 		63AB9C4E2BD37FAF0044F765 /* FluxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AB9C4D2BD37FAF0044F765 /* FluxView.swift */; };
@@ -119,6 +120,7 @@
 				63DB0E442B68F9F800BB42D2 /* FirebaseCrashlytics in Frameworks */,
 				CFBAB9AC29B84A66006FDF8A /* Alamofire in Frameworks */,
 				63DB0E422B68F9F800BB42D2 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				6376701D2BDE670F002BF380 /* SwiftyXMLParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +364,7 @@
 				CFBAB9AB29B84A66006FDF8A /* Alamofire */,
 				63DB0E412B68F9F800BB42D2 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				63DB0E432B68F9F800BB42D2 /* FirebaseCrashlytics */,
+				6376701C2BDE670F002BF380 /* SwiftyXMLParser */,
 			);
 			productName = MyNews;
 			productReference = CFBAB97229B8255A006FDF8A /* MyNews.app */;
@@ -418,6 +421,7 @@
 			packageReferences = (
 				CFBAB9AA29B84A66006FDF8A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				63DB0E402B68F9F800BB42D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				6376701B2BDE61EC002BF380 /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
 			);
 			productRefGroup = CFBAB97329B8255A006FDF8A /* Products */;
 			projectDirPath = "";
@@ -782,6 +786,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6376701B2BDE61EC002BF380 /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yahoojapan/SwiftyXMLParser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
 		63DB0E402B68F9F800BB42D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -801,6 +813,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6376701C2BDE670F002BF380 /* SwiftyXMLParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6376701B2BDE61EC002BF380 /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */;
+			productName = SwiftyXMLParser;
+		};
 		63DB0E412B68F9F800BB42D2 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 63DB0E402B68F9F800BB42D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

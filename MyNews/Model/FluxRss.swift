@@ -8,9 +8,12 @@
 import Foundation
 
 
-struct NewsRSS {
+struct NewsRss: Codable, Hashable {
+    let channel: [ItemRss]
+    
+}
+struct ItemRss: Codable, Hashable {
     let title: String
-    var url: String
-    var imageUrl: String
-    var description: String
+    let link: String
+    let description: String
 }

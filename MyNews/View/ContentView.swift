@@ -17,6 +17,11 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selection) {
             Text("Flux Rss")
+                .onAppear(perform: {
+                    FluxService.shared.launchSearch(search: "") { success , items, error in
+                        print(items![0].description)
+                    }
+                })
                 .tabItem {
                     Label("Flux", systemImage: "antenna.radiowaves.left.and.right")
                 }
