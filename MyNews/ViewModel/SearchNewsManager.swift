@@ -73,11 +73,12 @@ class SearchNewsManager: ObservableObject {
             return
         }
         let nextNews = addNews(news: news)
+        let nextNewsSorted =  nextNews.sorted { $0.publishedAt > $1.publishedAt }
         guard !nextNews.isEmpty else {
             launchError(NewsError.noNewsFound)
             return
         }
-        for new in nextNews {
+        for new in nextNewsSorted {
             self.news.append(new)
         }
         inProgress = false 

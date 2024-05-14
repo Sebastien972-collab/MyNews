@@ -9,23 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     enum Selection {
-        case home, search, discover, account, bookMark
+        case home, flux,  search, discover, account, bookMark
     }
-    @State private var selection = Selection.home
+    @State private var selection = Selection.flux
     @StateObject private var favoriteNews = FavoriteNewsManager()
     
     var body: some View {
         TabView(selection: $selection) {
-            Text("Flux Rss")
-                .onAppear(perform: {
-                    FluxService.shared.launchSearch(search: "") { success , items, error in
-                        print(items![0].description)
-                    }
-                })
+            FluxView()
                 .tabItem {
                     Label("Flux", systemImage: "antenna.radiowaves.left.and.right")
                 }
-                .tag(Selection.discover)
+                .tag(Selection.flux)
             HomeView()
                 .tabItem {
                     Label("Home", systemImage: "house.fill")

@@ -36,9 +36,6 @@ struct HomeView: View {
                     }
                 }
                 
-                Spacer()
-                
-                
             }
             .onAppear(){
                 if searchNews.breakingNews.isEmpty || searchNews.news.isEmpty {
