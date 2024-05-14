@@ -11,21 +11,19 @@ import Alamofire
 
 
 class RSSFetcher {
-    func fetchRSS(url: String, completion: @escaping ([RSSItem]?) -> Void) {
-        let staticLinkRss = ["https://www.journaldunet.com/rss/",
-                             "https://www.numerama.com/feed/",
-                             "https://www.frandroid.com/feed",
-                             "https://www.mac4ever.com/flux/rss/category/iphone"
-        ]
+    func fetchRSS(links: [Link], completion: @escaping ([Link], [RSSItem]?) -> Void) {
         let group = DispatchGroup()
         var rssItems: [RSSItem] = []
+        var linksStatusCheck: [Link] = []
         
-        for link in staticLinkRss {
+        for link in links {
             group.enter()
-            AF.request(String(link.utf8)).response { response in
+            AF.request(String(link.link.utf8)).response { response in
                 defer { group.leave() }
                 guard let data = response.data else {
-                    completion(nil)
+                    let linkChecked = Link(link: link.link, status: .bad)
+                    linksStatusCheck.append(linkChecked)
+                    completion(linksStatusCheck, nil)
                     return
                 }
                 
@@ -35,12 +33,15 @@ class RSSFetcher {
                 parser.delegate = rssParserDelegate
                 parser.parse()
                 rssItems.append(contentsOf: rssParserDelegate.items)
+                let linkChecked = Link(link: link.link, status: .checked)
+                linksStatusCheck.append(linkChecked)
             }
             
         }
         group.notify(queue: .main) {
+            
             let rssItemsSorted = rssItems.sorted { $0.dateFr < $1.dateFr }
-            completion(rssItemsSorted)
+            completion(linksStatusCheck, rssItemsSorted)
         }
     }
 }

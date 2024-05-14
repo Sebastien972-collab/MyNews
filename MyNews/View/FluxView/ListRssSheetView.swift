@@ -8,29 +8,46 @@
 import SwiftUI
 
 struct ListRssSheetView: View {
-    var links: [String] = ["https://www.journaldunet.com/rss/",
-                           "https://www.numerama.com/feed/",
-                           "https://www.frandroid.com/feed",
-                           "https://www.mac4ever.com/flux/rss/category/iphone"
-      ]
+    @ObservedObject var fluxManager: FluxViewManager
     var body: some View {
-        List {
-            ForEach(links, id: \.self) { link in
-                Text(link)
+        NavigationStack {
+            List {
+                Section {
+                    HStack {
+                        TextField("Ajoutez un lien ", text: $fluxManager.linkTapped)
+                        Button {
+                            fluxManager.addLink()
+                        } label: {
+                            Text("Add")
+                        }
+
+                    }
+                }
+                
+                RSSListSection(fluxManager: fluxManager, header: "Vérifier", status: .checked)
+                RSSListSection(fluxManager: fluxManager, header: "En attente", status: .pending)
+                RSSListSection(fluxManager: fluxManager, header: "Lien érroné", status: .bad)
+                RSSListSection(fluxManager: fluxManager, header: "Non Approuvé", status: .unapproved)
             }
+            
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        fluxManager.listBeingModified.toggle()
+                    }, label: {
+                        Text("Done")
+                    })
+                }
+            }
+            .alert(fluxManager.linkError.localizedDescription, isPresented: $fluxManager.showError) {
+                Button("Ok", role: .cancel) { }
         }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Image(systemName: "plus.circle")
-                })
-            }
         }
     }
 }
 
 #Preview {
     NavigationStack {
-        ListRssSheetView()
+        ListRssSheetView(fluxManager: FluxViewManager())
     }
 }

@@ -34,7 +34,7 @@ struct FluxView: View {
                 .navigationTitle(Text("Flux"))
                 .navigationBarTitleDisplayMode(.inline)
                 .sheet(isPresented: $fluxManager.listBeingModified, content: {
-                    ListRssSheetView()
+                    ListRssSheetView(fluxManager: fluxManager)
                 }) 
                 .toolbar(content: {
                     ToolbarItem(placement: .topBarTrailing) {

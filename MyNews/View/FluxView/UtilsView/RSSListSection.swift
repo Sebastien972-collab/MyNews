@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct RSSListSection: View {
+    @ObservedObject var fluxManager: FluxViewManager
+    let header: String
+    let status: Link.StatusLink
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Section(content: {
+            ForEach(fluxManager.fluxLinks, id: \.self) { link in
+                if link.status == status {
+                    Text(link.link)
+                }
+            }
+            .onDelete(perform: { indexSet in
+                fluxManager.removeLink(indexSet)
+            })
+        }, header: {
+                Text(header)
+        })
     }
 }
 
 #Preview {
-    RSSListSection()
+    List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
+        RSSListSection(fluxManager: FluxViewManager(), header: "Pending", status: .pending)
+    }
 }
