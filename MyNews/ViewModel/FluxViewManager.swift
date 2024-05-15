@@ -19,10 +19,11 @@ class FluxViewManager: ObservableObject {
     @Published var rssError: Error = RSSError.uknowError
     @Published var linkError: Error = LinkError.uknowError
     @Published var showError: Bool = false
-    @Published var fluxLinks: [Link] = [Link(link: "https://www.journaldunet.com/rss/"),
+    @Published var fluxLinks: [Link] = [
                                         Link(link: "https://www.numerama.com/feed/"),
                                         Link(link: "https://www.frandroid.com/feed"),
-                                        Link(link: "https://www.mac4ever.com/flux/rss/category/")]
+                                        Link(link: "https://www.mac4ever.com/flux/rss/category/")
+    ]
     @Published var linkTapped: String = ""
     
     

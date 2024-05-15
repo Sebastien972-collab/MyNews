@@ -25,16 +25,24 @@ struct NewsDetailView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(maxWidth: .infinity, maxHeight: 250)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
-                    
+                
             } placeholder: {
                 ProgressView()
             }
             Text(article.content)
             Spacer()
-            Button {
-                safariViewIsPresented.toggle()
-            } label: {
-                Text("Lire plus")
+            HStack {
+                Button {
+                    safariViewIsPresented.toggle()
+                } label: {
+                    Text("Lire plus")
+                }
+                Spacer()
+                Button {
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+
             }
         }
         .padding()
@@ -46,12 +54,13 @@ struct NewsDetailView: View {
                     Image(systemName: "star.fill")
                         .foregroundColor(favoriteNewsVm.isFavorite(article) ? .yellow : .gray)
                 }
-
+                
             }
         })
         .fullScreenCover(isPresented: $safariViewIsPresented) {
             SafariView(url: article.url)
         }
+        
     }
     
 }
@@ -60,6 +69,7 @@ struct NewsDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             NewsDetailView(article: .preview)
+                .environmentObject(FavoriteNewsManager())
         }
     }
 }
