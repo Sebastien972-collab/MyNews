@@ -38,9 +38,8 @@ struct NewsDetailView: View {
                     Text("Lire plus")
                 }
                 Spacer()
-                Button {
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
+                ShareLink(item: article.url, preview: SharePreview("Icon", image: Image(.myNewsLogo))) {
+                    Label("", systemImage: "square.and.arrow.up")
                 }
 
             }
@@ -60,6 +59,8 @@ struct NewsDetailView: View {
         .fullScreenCover(isPresented: $safariViewIsPresented) {
             SafariView(url: article.url)
         }
+        .sheet(isPresented: $favoriteNewsVm.isSharing, content: {
+        })
         
     }
     

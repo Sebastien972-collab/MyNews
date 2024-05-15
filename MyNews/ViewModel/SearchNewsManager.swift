@@ -13,11 +13,15 @@ class SearchNewsManager: ObservableObject {
     @Published var search: String = ""
     @Published var news: [Article] = []
     @Published var newsError: Error = NewsError.uknowError
-    @Published var showError : Bool = false
-    @Published var inProgress : Bool = false
-    @Published var isComplete : Bool = false
+    @Published var showError: Bool = false
+    @Published var inProgress: Bool = false
+    @Published var isComplete: Bool = false
     @Published var page : Int = 1
     var service: NewsService = NewsService.shared
+    
+    // For sharing
+    @Published var itemsForSharings: [Any] = []
+    @Published var isSharing: Bool = false
     
     
     init(service: NewsService) {
