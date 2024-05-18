@@ -8,46 +8,51 @@
 import SwiftUI
 
 struct ListRssSheetView: View {
-    @ObservedObject var fluxManager: FluxViewManager
+    @ObservedObject var linkManager: LinkManager
+    @Binding var showSheetView: Bool
+    @FocusState private var isFocused: Bool
     var body: some View {
         NavigationStack {
             List {
                 Section {
                     HStack {
-                        TextField("Ajoutez un lien ", text: $fluxManager.linkTapped)
+                        TextField("Ajoutez un lien ", text: $linkManager.linkTapped)
+                        Divider()
                         Button {
-                            fluxManager.addLink()
+                            print("Button pressed")
+                            linkManager.addLink()
                         } label: {
                             Text("Add")
+                                .bold()
+                                .foregroundStyle(linkManager.linkTapped.isEmpty ? .gray : .blue)
                         }
-
+                        
                     }
                 }
                 
-                RSSListSection(fluxManager: fluxManager, header: "Vérifier", status: .checked)
-                RSSListSection(fluxManager: fluxManager, header: "En attente", status: .pending)
-                RSSListSection(fluxManager: fluxManager, header: "Lien érroné", status: .bad)
-                RSSListSection(fluxManager: fluxManager, header: "Non Approuvé", status: .unapproved)
+                RSSListSection(linkManager: linkManager, header: "Vérifier", status: .checked)
+                RSSListSection(linkManager: linkManager, header: "En attente", status: .pending)
+                RSSListSection(linkManager: linkManager, header: "Lien érroné", status: .bad)
+                RSSListSection(linkManager: linkManager, header: "Non Approuvé", status: .unapproved)
             }
-            
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-                        fluxManager.listBeingModified.toggle()
+                        showSheetView.toggle()
                     }, label: {
                         Text("Done")
                     })
                 }
             }
-            .alert(fluxManager.linkError.localizedDescription, isPresented: $fluxManager.showError) {
+            .alert(linkManager.linkError.localizedDescription, isPresented: $linkManager.showLinkError) {
                 Button("Ok", role: .cancel) { }
-        }
+            }
         }
     }
 }
 
 #Preview {
     NavigationStack {
-        ListRssSheetView(fluxManager: FluxViewManager())
+        ListRssSheetView(linkManager: LinkManager(), showSheetView: .constant(true))
     }
 }

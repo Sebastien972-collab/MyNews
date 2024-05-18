@@ -9,50 +9,57 @@ import SwiftUI
 
 struct FluxView: View {
     @StateObject var fluxManager = FluxViewManager()
-    
+    @State var showSheetView: Bool = false
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack {
-                    Picker("What flux do you see", selection: $fluxManager.segmentedControl) {
-                        ForEach(FluxViewManager.SegmentedCommand.allCases) { item in
-                            Text(item.rawValue)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    .padding()
-                    ForEach(fluxManager.items) { item in
-                        NavigationLink {
-                            SafariView(url: item.link)
-                        } label: {
-                            RssRow(rssItem: item)
-                        }
-                        
-                        
-                    }
+            ZStack {
+                if fluxManager.items.isEmpty {
+                    Text("Aucun flux détecté")
                 }
-                .navigationTitle(Text("Flux"))
-                .navigationBarTitleDisplayMode(.inline)
-                .sheet(isPresented: $fluxManager.listBeingModified, content: {
-                    ListRssSheetView(fluxManager: fluxManager)
-                }) 
-                .toolbar(content: {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button(action: {
-                            fluxManager.listBeingModified.toggle()
-                        }, label: {
-                            Image(systemName: "plus.circle")
-                        })
+                ZStack(content: {
+                    if fluxManager.inProgress {
+                        ProgressView()
+                    } else {
+                        ScrollView {
+                            VStack {
+                                ForEach(fluxManager.items) { item in
+                                    NavigationLink {
+                                        SafariView(url: item.link)
+                                    } label: {
+                                        RssRow(rssItem: item)
+                                    }
+                                }
+                            }
+                            .navigationTitle(Text("Flux"))
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbar(content: {
+                                ToolbarItem(placement: .topBarTrailing) {
+                                    Button(action: {
+                                        showSheetView.toggle()
+                                    }, label: {
+                                        Image(systemName: "plus.circle")
+                                    })
+                                }
+                            })
+                        }
+                        .refreshable {
+                            fluxManager.refresh()
+                        }
                     }
                 })
-            }
-            .alert(fluxManager.rssError.localizedDescription, isPresented: $fluxManager.showError) {
-                Button("Ok", role: .cancel) { }
+                .alert(fluxManager.error.localizedDescription, isPresented: $fluxManager.showError) {
+                    Button("Ok", role: .cancel) { }
+                }
             }
         }
-        
+        .sheet(isPresented: $showSheetView, content: {
+            ListRssSheetView(linkManager: fluxManager.linkManager, showSheetView: $showSheetView)
+        })
         .onAppear(){
-            fluxManager.fetchRss()
+            
+            if !fluxManager.linkManager.fluxLinks.isEmpty && fluxManager.items.isEmpty {
+                fluxManager.refresh()
+            }
         }
     }
 }

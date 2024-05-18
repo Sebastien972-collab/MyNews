@@ -17,27 +17,23 @@ class FavoriteLinks {
     init(persistenceController: PersistenceController) {
         self.viewContext = persistenceController.container.viewContext
     }
-    private var cdLinks : [CDRssLink] {
+    private var cdLinks: [CDRssLink] {
         let request : NSFetchRequest<CDRssLink> = CDRssLink.fetchRequest()
-        request.sortDescriptors = [
-            NSSortDescriptor(key: "title" , ascending: true),
-            NSSortDescriptor(key: "author", ascending: true)
-        ]
         guard let favoriteCDNews = try? viewContext.fetch(request) else {
             return []
         }
         return favoriteCDNews
     }
-    var all : [String] {
-        var favoriteLinks: [String] = []
+    var all : [Link] {
+        var favoriteLinks: [Link] = []
         for link in cdLinks {
-            let newLink = link.links ?? ""
+            let newLink = Link(link: link.links ?? "")
             favoriteLinks.append(newLink)
         }
         return favoriteLinks
     }
     
-    func checkElementIsFavorite(link newLinks: String) -> Bool {
+    func checkElementIsFavorite(link newLinks: Link) -> Bool {
         for link in all {
             if  newLinks == link {
                 return true
@@ -46,16 +42,31 @@ class FavoriteLinks {
         return false
     }
     ///This function remove a existing recipe
-    func removeElementInFavorite(link linkToRemove : String) throws {
+    func removeElementInFavorite(link linkToRemove : Link) throws {
         for (index ,link) in all.enumerated() {
             if link == linkToRemove {
                 viewContext.delete(cdLinks[index])
             }
         }
+        do {
+            try viewContext.save()
+        } catch {
+            throw error
+        }
     }
-    private func addNewArticleFavorite(link : String) throws {
+    func removeElement(_ indexSet: IndexSet) throws {
+        for index in indexSet.reversed() {
+            viewContext.delete(cdLinks[index])
+        }
+        do {
+            try viewContext.save()
+        } catch {
+            throw error
+        }
+    }
+    private func addNewArticleFavorite(link : Link) throws {
         let linkFav = CDRssLink(context: viewContext)
-        linkFav.links = link
+        linkFav.links = link.link
         
         do {
             try viewContext.save()
@@ -64,7 +75,7 @@ class FavoriteLinks {
         }
     }
     /// This function save or unsave a  recipe
-    func saveArticle(link: String) throws {
+    func saveArticle(link: Link) throws {
         switch checkElementIsFavorite(link: link) {
         case true :
             do {

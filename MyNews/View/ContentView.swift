@@ -11,19 +11,14 @@ struct ContentView: View {
     enum Selection {
         case home, flux,  search, discover, account, bookMark
     }
-    @State private var selection = Selection.flux
+    @State private var selection = Selection.home
     @StateObject private var favoriteNews = FavoriteNewsManager()
     
     var body: some View {
         TabView(selection: $selection) {
-            FluxView()
-                .tabItem {
-                    Label("Flux", systemImage: "antenna.radiowaves.left.and.right")
-                }
-                .tag(Selection.flux)
             HomeView()
                 .tabItem {
-                    Label("Home", systemImage: "house.fill")
+                    Label("Now", systemImage: "newspaper")
                 }
                 .tag(Selection.home)
             DiscoverView()
@@ -31,6 +26,11 @@ struct ContentView: View {
                     Label("Search", systemImage: "magnifyingglass")
                 }
                 .tag(Selection.search)
+            FluxView()
+                .tabItem {
+                    Label("Abonnement", systemImage: "checkmark.rectangle.stack.fill")
+                }
+                .tag(Selection.flux)
         }
         .environmentObject(favoriteNews)
     }

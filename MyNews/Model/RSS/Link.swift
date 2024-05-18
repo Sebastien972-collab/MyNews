@@ -14,8 +14,7 @@ struct Link: Hashable, Equatable {
     let link : String
     var status: StatusLink = .pending
     
-    mutating func changeStatusTo(_ newStatus: StatusLink) {
-        status = newStatus
-    }
-    
+    static func ==(lhs: Link, rhs: Link) -> Bool {
+            return lhs.link == rhs.link
+        }
 }

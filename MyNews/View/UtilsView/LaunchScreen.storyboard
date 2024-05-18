@@ -16,20 +16,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="myNewsLogo" translatesAutoresizingMaskIntoConstraints="NO" id="LWC-7J-7wM">
-                                <rect key="frame" x="121.66666666666669" y="351" width="150" height="150"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="myNewsLogo" translatesAutoresizingMaskIntoConstraints="NO" id="EDE-Yv-c8k">
+                                <rect key="frame" x="71.666666666666686" y="301" width="250" height="250"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="LWC-7J-7wM" secondAttribute="height" multiplier="1:1" id="75J-Ic-CR6"/>
-                                    <constraint firstAttribute="width" constant="150" id="MCc-P6-IDf"/>
+                                    <constraint firstAttribute="height" constant="250" id="7hr-uH-ff4"/>
+                                    <constraint firstAttribute="width" secondItem="EDE-Yv-c8k" secondAttribute="height" multiplier="1:1" id="pNt-DI-LWE"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
-                        <color key="backgroundColor" red="0.2235293984" green="0.18039217590000001" blue="0.15686275059999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.16749262810000001" green="0.53156465289999999" blue="0.92724817989999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="LWC-7J-7wM" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="292" id="0rj-Oy-mps"/>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="LWC-7J-7wM" secondAttribute="bottom" constant="317" id="d6e-yN-A1p"/>
-                            <constraint firstItem="LWC-7J-7wM" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="uWg-AX-zZJ"/>
+                            <constraint firstItem="EDE-Yv-c8k" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="3Gn-FT-XLa"/>
+                            <constraint firstItem="EDE-Yv-c8k" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="4pr-7H-0Kd"/>
                         </constraints>
                     </view>
                 </viewController>
