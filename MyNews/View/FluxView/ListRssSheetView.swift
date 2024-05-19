@@ -17,16 +17,21 @@ struct ListRssSheetView: View {
                 Section {
                     HStack {
                         TextField("Ajoutez un lien ", text: $linkManager.linkTapped)
-                        Divider()
+                            .onAppear {
+                                linkManager.getClipboardContent()
+                            }
                         Button {
+                            withAnimation {
+                                linkManager.addLink()
+                            }
                             print("Button pressed")
-                            linkManager.addLink()
+                            
                         } label: {
                             Text("Add")
                                 .bold()
                                 .foregroundStyle(linkManager.linkTapped.isEmpty ? .gray : .blue)
+                                .animation(.easeInOut(duration: 2), value: linkManager.linkTapped)
                         }
-                        
                     }
                 }
                 

@@ -43,6 +43,7 @@ struct NewsDetailView: View {
                 }
 
             }
+            Spacer()
         }
         .padding()
         .toolbar(content: {

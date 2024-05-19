@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct FluxView: View {
-    @StateObject var fluxManager = FluxViewManager()
-    @State var showSheetView: Bool = false
+    @StateObject private var fluxManager = FluxViewManager()
+    @State private var showSheetView: Bool = false
     var body: some View {
         NavigationStack {
             ZStack {
@@ -30,7 +30,7 @@ struct FluxView: View {
                                     }
                                 }
                             }
-                            .navigationTitle(Text("Flux"))
+                            .navigationTitle(Text("Abonnements"))
                             .navigationBarTitleDisplayMode(.inline)
                             .toolbar(content: {
                                 ToolbarItem(placement: .topBarTrailing) {
@@ -56,7 +56,6 @@ struct FluxView: View {
             ListRssSheetView(linkManager: fluxManager.linkManager, showSheetView: $showSheetView)
         })
         .onAppear(){
-            
             if !fluxManager.linkManager.fluxLinks.isEmpty && fluxManager.items.isEmpty {
                 fluxManager.refresh()
             }

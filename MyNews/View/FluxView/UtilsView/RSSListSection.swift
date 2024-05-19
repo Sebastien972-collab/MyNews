@@ -18,6 +18,7 @@ struct RSSListSection: View {
                 if link.status == status {
                     Text(link.link)
                 }
+                
             }
             .onDelete(perform: { indexSet in
                 linkManager.removeLink(indexSet)

@@ -13,7 +13,6 @@ struct ContentView: View {
     }
     @State private var selection = Selection.home
     @StateObject private var favoriteNews = FavoriteNewsManager()
-    
     var body: some View {
         TabView(selection: $selection) {
             HomeView()
@@ -28,7 +27,7 @@ struct ContentView: View {
                 .tag(Selection.search)
             FluxView()
                 .tabItem {
-                    Label("Abonnement", systemImage: "checkmark.rectangle.stack.fill")
+                    Label("Abonnements", systemImage: "checkmark.rectangle.stack.fill")
                 }
                 .tag(Selection.flux)
         }

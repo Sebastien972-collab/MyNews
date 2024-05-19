@@ -21,7 +21,9 @@ struct NewsListView: View {
                     }
                 } else {
                     Button {
-                        searchNews.nextPage()
+                        withAnimation {
+                            searchNews.nextPage()
+                        }
                     } label: {
                         Text("Charger plus")
                             .padding()

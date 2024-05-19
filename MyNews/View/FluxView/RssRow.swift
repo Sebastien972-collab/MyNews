@@ -9,19 +9,21 @@ import SwiftUI
 
 struct RssRow: View {
     let rssItem: RSSItem
+    @Environment(\.colorScheme) private var colorScheme
     var body: some View {
         VStack(alignment: .leading) {
             Text(rssItem.title)
                 .font(.headline)
                 .lineLimit(1)
-            Text(rssItem.description)
+                .padding(.bottom)
+            Text(rssItem.descriptionDecode)
                 .font(.subheadline)
                 .lineLimit(3)
             Divider()
             Text("- \(rssItem.hostname) - \(rssItem.dateFr)")
                 .font(.footnote)
         }
-        .foregroundStyle(.black)
+        .foregroundStyle(colorScheme == .dark ? .white : .black)
         .frame(maxHeight: 150)
         .padding()
         .multilineTextAlignment(.leading)

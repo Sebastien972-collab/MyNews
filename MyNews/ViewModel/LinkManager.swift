@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class LinkManager: ObservableObject {
     @Published var linkTapped: String = ""
@@ -56,5 +57,16 @@ class LinkManager: ObservableObject {
             showLinkError.toggle()
         }
         
+    }
+    
+    func getClipboardContent() {
+        guard linkTapped.isEmpty else {
+            return
+        }
+        if let string = UIPasteboard.general.string {
+            linkTapped = string
+        } else {
+            linkTapped = "Le presse-papiers ne contient pas de texte."
+        }
     }
 }

@@ -38,9 +38,11 @@ struct HomeView: View {
                 
             }
             .onAppear(){
-                if searchNews.breakingNews.isEmpty || searchNews.news.isEmpty {
-                    searchNews.getBreakingNews()
-                    searchNews.launchSearch()
+                withAnimation {
+                    if searchNews.breakingNews.isEmpty || searchNews.news.isEmpty {
+                        searchNews.getBreakingNews()
+                        searchNews.launchSearch()
+                    }
                 }
             }
             .alert(searchNews.newsError.localizedDescription, isPresented: $searchNews.showError) {

@@ -15,6 +15,14 @@ struct RSSItem: Identifiable, Hashable, Equatable {
     var title: String
     var link: String
     var description: String
+    var descriptionDecode: String {
+        if let utf8Data = description.data(using: .utf8) {
+            if let descriptionDecoded = String(data: utf8Data, encoding: .utf8) {
+                return descriptionDecoded
+            }
+        }
+        return description
+    }
     var pubDate: String
     var dateFr: String {
         calculateTimeDifference(from: pubDate)

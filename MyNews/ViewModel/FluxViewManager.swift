@@ -13,7 +13,7 @@ class FluxViewManager: ObservableObject {
     @Published var inProgress = false
     @Published var error: Error = RSSError.uknowError
     @Published var showError: Bool = false
-	    @Published var linkManager = LinkManager()
+    @Published var linkManager = LinkManager()
     // MARK: - Rss Attribut
    
     
