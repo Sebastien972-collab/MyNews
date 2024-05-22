@@ -27,6 +27,14 @@ class FavoriteLinks {
     var all : [Link] {
         var favoriteLinks: [Link] = []
         for link in cdLinks {
+            var status: Link.StatusLink {
+                for status in Link.StatusLink.allCases {
+                    if link.status ?? ""  == status.rawValue {
+                        return status
+                    }
+                }
+                return .pending
+            }
             let newLink = Link(link: link.links ?? "")
             favoriteLinks.append(newLink)
         }
@@ -67,7 +75,7 @@ class FavoriteLinks {
     private func addNewArticleFavorite(link : Link) throws {
         let linkFav = CDRssLink(context: viewContext)
         linkFav.links = link.link
-        
+        linkFav.status = link.status.rawValue
         do {
             try viewContext.save()
         } catch {

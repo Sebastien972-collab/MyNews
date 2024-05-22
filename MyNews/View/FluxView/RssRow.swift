@@ -10,6 +10,7 @@ import SwiftUI
 struct RssRow: View {
     let rssItem: RSSItem
     @Environment(\.colorScheme) private var colorScheme
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text(rssItem.title)

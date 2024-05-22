@@ -15,13 +15,13 @@ struct Article : Codable, Hashable, Equatable{
     var id: String{
         return self.title
     }
-    let source : Source
-    let author : String?
-    let title : String
-    let description : String
-    let url : String
-    let urlToImage : String?
-    let publishedAt : String
+    let source: Source
+    let author: String?
+    let title: String
+    let description: String
+    let url: String
+    let urlToImage: String?
+    let publishedAt: String
     var dateFr: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ" // Format ISO 8601

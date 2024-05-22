@@ -11,12 +11,16 @@ struct ListRssSheetView: View {
     @ObservedObject var linkManager: LinkManager
     @Binding var showSheetView: Bool
     @FocusState private var isFocused: Bool
+    @State private var okButtonOpacity: Double = 0 
+
     var body: some View {
         NavigationStack {
             List {
                 Section {
                     HStack {
                         TextField("Ajoutez un lien ", text: $linkManager.linkTapped)
+                            .focused($isFocused)
+                            .padding(10)
                             .onAppear {
                                 linkManager.getClipboardContent()
                             }
@@ -41,6 +45,21 @@ struct ListRssSheetView: View {
                 RSSListSection(linkManager: linkManager, header: "Non Approuvé", status: .unapproved)
             }
             .toolbar {
+                if isFocused {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            isFocused.toggle()
+                        } label: {
+                            Text("OK")
+                        }
+                        .opacity(okButtonOpacity)
+                        .onAppear(perform: {
+                            withAnimation(.easeIn(duration: 0.5)) {
+                                okButtonOpacity = 1
+                            }
+                        })
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
                         showSheetView.toggle()

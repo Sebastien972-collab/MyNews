@@ -37,13 +37,14 @@ struct NewsDetailView: View {
                 } label: {
                     Text("Lire plus")
                 }
+                .navigationDestination(isPresented: $safariViewIsPresented) {
+                    SafariView(url: article.url)
+                }
                 Spacer()
-                ShareLink(item: article.url, preview: SharePreview("Icon", image: Image(.myNewsLogo))) {
+                ShareLink(item: article.url, subject: Text(article.title), message: Text(article.description), preview: SharePreview("Icon", image: Image(.myNewsLogo))) {
                     Label("", systemImage: "square.and.arrow.up")
                 }
-
             }
-            Spacer()
         }
         .padding()
         .toolbar(content: {
@@ -56,11 +57,6 @@ struct NewsDetailView: View {
                 }
                 
             }
-        })
-        .fullScreenCover(isPresented: $safariViewIsPresented) {
-            SafariView(url: article.url)
-        }
-        .sheet(isPresented: $favoriteNewsVm.isSharing, content: {
         })
         
     }

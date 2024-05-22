@@ -8,7 +8,7 @@
 import Foundation
 
 struct Link: Hashable, Equatable {
-    enum StatusLink {
+    enum StatusLink: String, Hashable, CaseIterable {
     case pending, checked, bad, unapproved
     }
     let link : String

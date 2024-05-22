@@ -34,8 +34,9 @@ class FavoriteNewsManager: SearchNewsManager {
         }.isEmpty
     }
     
-    func refresh() {
+    override func refresh() {
         news = favoriteNews.all
+        super.refresh()
     }
     
     

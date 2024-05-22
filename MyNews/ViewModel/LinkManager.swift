@@ -17,9 +17,11 @@ class LinkManager: ObservableObject {
     @Published var isEditing: Bool = false
     
     // MARK: - Links Tools
+    ///Refresh LinkManager
     func refresh() {
         fluxLinks = favorLinksManager.all
     }
+    ///Ajoute un lien dans fluxlinks
     func addLink() {
         guard !linkTapped.isEmpty else {
             return
@@ -47,7 +49,7 @@ class LinkManager: ObservableObject {
         linkTapped.removeAll()
         
     }
-    
+    ///Supprime un lie
     func removeLink(_ offset: IndexSet) {
         fluxLinks.remove(atOffsets: offset)
         do {
@@ -56,17 +58,17 @@ class LinkManager: ObservableObject {
             linkError = error
             showLinkError.toggle()
         }
-        
     }
     
+    ///Une fonction qui récupère lun lien dans le presse papier.
     func getClipboardContent() {
         guard linkTapped.isEmpty else {
             return
         }
-        if let string = UIPasteboard.general.string {
-            linkTapped = string
+        if let string = UIPasteboard.general.url {
+            linkTapped = "\(string)"
         } else {
-            linkTapped = "Le presse-papiers ne contient pas de texte."
+            print("Le presse-papiers ne contient pas de texte.")
         }
     }
 }

@@ -25,7 +25,7 @@ struct HomeView: View {
                     })
                     .padding(.bottom)
                     Divider()
-                    Text("Recommendation")
+                    Text("Recommendations")
                         .font(.title3)
                         .bold()
                     
@@ -35,12 +35,13 @@ struct HomeView: View {
                         }
                     }
                 }
-                
+                .refreshable {
+                    searchNews.refresh()
+                }
             }
             .onAppear(){
                 withAnimation {
                     if searchNews.breakingNews.isEmpty || searchNews.news.isEmpty {
-                        searchNews.getBreakingNews()
                         searchNews.launchSearch()
                     }
                 }
