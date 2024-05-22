@@ -532,7 +532,6 @@
 			packageReferences = (
 				CFBAB9AA29B84A66006FDF8A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				63DB0E402B68F9F800BB42D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				6376701B2BDE61EC002BF380 /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */,
 			);
 			productRefGroup = CFBAB97329B8255A006FDF8A /* Products */;
 			projectDirPath = "";
@@ -1006,14 +1005,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6376701B2BDE61EC002BF380 /* XCRemoteSwiftPackageReference "SwiftyXMLParser" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/yahoojapan/SwiftyXMLParser.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.6.0;
-			};
-		};
 		63DB0E402B68F9F800BB42D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
