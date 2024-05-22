@@ -12,7 +12,6 @@ final class HomeVMTest: XCTestCase {
     var homeVm = HomeViewManager(service: NewsService(session: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData))))
     
     func testGetBreakingNews() {
-        homeVm.getBreakingNews()
         XCTAssertFalse(homeVm.breakingNews.isEmpty)
         
     }

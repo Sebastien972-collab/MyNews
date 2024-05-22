@@ -11,7 +11,7 @@ class HomeViewManager: SearchNewsManager {
     @Published var breakingNews: [Article] = []
     private var isBreakingNews = false
     
-    func getBreakingNews() {
+    private func getBreakingNews() {
         inProgress = true
         service.launchSearch(search: "france", page: page) { success , news, error in
             guard success, let news = news, error == nil else {
@@ -22,10 +22,17 @@ class HomeViewManager: SearchNewsManager {
             
         }
     }
-    
     override func launchSearch() {
+        getBreakingNews()
         search = "recommandation"
         super.launchSearch()
         nextPage()
+    }
+    
+    override func refresh() {
+        super.news.removeAll()
+        breakingNews.removeAll()
+        getBreakingNews()
+        launchSearch()
     }
 }

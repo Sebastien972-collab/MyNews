@@ -11,7 +11,8 @@ struct DiscoverView: View {
     @State private var allTheme = ["Politique", "Gaming", "Sport", "Education","Santé", "Monde", "Culture","Environnement", "Météo"]
     @State private var searchViewIsPresented = false
     @StateObject private var searchNews: SearchNewsManager = SearchNewsManager(service: .shared)
-    @FocusState private var fieldIsFocused : Bool
+    @FocusState private var fieldIsFocused: Bool
+    @State private var okButtonOpacity: Double = 0
     
     var body: some View {
         NavigationStack {
@@ -32,19 +33,39 @@ struct DiscoverView: View {
                     .shadow(color: .gray, radius: 10)
                     .padding()
                     
-                    ForEach(filterTheme, id: \.self) { theme in
+                    Picker("", selection: $searchNews.selection) {
+                        ForEach(SearchNewsManager.Selection.allCases, id: \.self) { selection in
+                            Text(selection.rawValue)
+                                .tag(selection)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .padding(.horizontal)
+                    .padding(.bottom)
+                    ForEach(searchNews.selection == .suggestion ? filterTheme : searchNews.recentSearchs, id: \.self) { theme in
                         Button(action: {
                             searchNews.search = theme
                             searchNews.launchSearch()
                         }, label: {
-                            Text(theme)
+                            HStack {
+                                Text(theme)
+                                    .foregroundStyle(searchNews.selection == .suggestion ? .blue : .secondary)
+                                    .italic(searchNews.selection == .suggestion ? false : true)
+                                if searchNews.selection == .recent {
+                                    Button {
+                                        withAnimation {
+                                            searchNews.remove(theme)
+                                        }
+                                    } label: {
+                                        Text("X")
+                                    }
+                                }
+                            }
                         })
                     }
+                    
                 }
             })
-            .onTapGesture {
-                fieldIsFocused = false
-            }
             .alert(searchNews.newsError.localizedDescription, isPresented: $searchNews.showError) {
                 Button("Ok", role: .cancel) { }
             }
@@ -55,6 +76,23 @@ struct DiscoverView: View {
                 NewsListView(searchNews: searchNews)
             }
             .navigationTitle(Text("Discover"))
+            .toolbar(content: {
+                if fieldIsFocused {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            fieldIsFocused.toggle()
+                        } label: {
+                            Text("OK")
+                        }
+                        .opacity(okButtonOpacity)
+                        .onAppear(perform: {
+                            withAnimation(.easeIn(duration: 0.5)) {
+                                okButtonOpacity = 1
+                            }
+                        })
+                    }
+                }
+            })
             
         }
     }

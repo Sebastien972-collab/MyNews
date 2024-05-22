@@ -1,4 +1,5 @@
 {
+  "originHash" : "7a7fc45b2cdc62c94f020d01a08d304022b3e131ffb27ca9e22b9b6684a67906",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -125,7 +126,16 @@
         "revision" : "65e8f29b2d63c4e38e736b25c27b83e012159be8",
         "version" : "1.25.2"
       }
+    },
+    {
+      "identity" : "swiftyxmlparser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yahoojapan/SwiftyXMLParser.git",
+      "state" : {
+        "revision" : "d7a1d23f04c86c1cd2e8f19247dd15d74e0ea8be",
+        "version" : "5.6.0"
+      }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
