@@ -9,43 +9,42 @@ import SwiftUI
 import _AuthenticationServices_SwiftUI
 
 struct ConnectionView: View {
+    var selection: LoginViewModel.TypeOfConnectionSelection
+    @StateObject var loginManger: LoginViewModel = LoginViewModel()
     var body: some View {
-        ZStack {
-            Image("worldImage")
-                .resizable()
-                .scaledToFill()
-                .edgesIgnoringSafeArea(.all)
-            VStack {
-                Spacer()
-                Image("myNewsLogo")
+        VStack {
+            HStack(spacing: 10, content: {
+                Text("Pour profiter de toutes les fonctionnalités à venir")
+                Image(systemName: "ipad.and.iphone")
                     .resizable()
                     .frame(width: 80, height: 80)
+            })
+            //Custom TextField
+            VStack(spacing: 10, content: {
+                CustomTextField(hint: "Email", text: $loginManger.email, contentype: .emailAddress)
+                CustomTextField(isSecureField: true, hint: "Password", text: $loginManger.password, contentype: .password)
+            })
+            .padding(.vertical)
+                
+            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Text(selection.rawValue)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.black)
                     .padding()
-                VStack(content: {
-                    SignInWithAppleButton(.continue) { asAuth in
-                    } onCompletion: { result in
-                    }
-                    .frame(maxWidth: 300, maxHeight: 60)
-                    .cornerRadius(25)
+                    .background(RoundedRectangle(cornerRadius: 15, style: .continuous)
+                        .fill(.black.opacity(0.05)))
                     
-                    Button(action: {}, label: {
-                        Text("Continuer avec mail")
-                            .frame(maxWidth: 300, maxHeight: 60)
-                            .background()
-                            .cornerRadius(25)
-                    })
-                })
-                Spacer()
-                Text("By: Sébastien DAGUIN INC")
-                    .foregroundStyle(.white)
-                    .bold()
-                    .italic()
-            }
-            
+            })
+            Spacer()
+                .navigationTitle(selection.rawValue)
+                .navigationBarTitleDisplayMode(.inline)
         }
+        .padding()
     }
 }
 
 #Preview {
-    ConnectionView()
+    NavigationView {
+        ConnectionView(selection: .signIn)
+    }
 }

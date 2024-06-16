@@ -12,12 +12,12 @@ struct SettingsView: View {
         Form {
             Section {
                 NavigationLink {
-                    Text("Se connecter")
+                    ConnectionView(selection: .signIn)
                 } label: {
                     Label("Se connecter", systemImage: "person.fill")
                 }
                 NavigationLink {
-                    Text("Se connecter")
+                    ConnectionView(selection: .signUp)
                 } label: {
                     Label("Créer un compte ", systemImage: "person.fill.badge.plus")
                 }
@@ -54,7 +54,6 @@ struct SettingsView: View {
             } header: {
                 Text("Réglages")
             }
-            
             Section {
                 NavigationLink {
                     SafariView(url: "https://mon-site-pro-9fced.web.app/")
@@ -65,8 +64,6 @@ struct SettingsView: View {
             } header: {
                 Text("À propos ")
             }
-
-
         }
         .navigationTitle(Text("Réglages"))
         .navigationBarTitleDisplayMode(.inline)
