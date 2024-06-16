@@ -22,7 +22,7 @@ class FavoriteNewsManager: SearchNewsManager {
     func saveRecipe(_ article: Article) {
         do {
             try favoriteNews.saveArticle(article: article)
-            refresh()
+            news = favoriteNews.all
         } catch  {
             newsError = error
             showError.toggle()
@@ -35,8 +35,8 @@ class FavoriteNewsManager: SearchNewsManager {
     }
     
     override func refresh() {
-        news = favoriteNews.all
-        super.refresh()
+//        news = favoriteNews.all
+//        super.refresh()
     }
     
     

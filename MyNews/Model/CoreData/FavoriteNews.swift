@@ -71,9 +71,11 @@ class FavoriteNews {
         articleFav.sourceName = article.source.name
         articleFav.url = article.url
         articleFav.urlToImage = article.urlToImage
-
         do {
+           
+            print("Try to save context")
             try viewContext.save()
+            print(all.count)
         } catch {
             throw error
         }
