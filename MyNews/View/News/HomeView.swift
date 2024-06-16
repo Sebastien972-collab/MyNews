@@ -12,8 +12,12 @@ struct HomeView: View {
     @State private var showView = false
     var body: some View {
         NavigationStack{
-            VStack(alignment: .leading, spacing: 10) {
-                ScrollView(.vertical) {
+            VStack(alignment: .leading, spacing: 20) {
+                ScrollView(.vertical, showsIndicators: false) {
+                    Spacer()
+                    Text("Breaking news")
+                        .font(.title3)
+                        .bold()
                     ScrollView(.horizontal, showsIndicators: false, content: {
                         HStack {
                             ForEach(searchNews.breakingNews, id: \.self) { new in
@@ -49,13 +53,19 @@ struct HomeView: View {
             .alert(searchNews.newsError.localizedDescription, isPresented: $searchNews.showError) {
                 Button("Ok", role: .cancel) { }
             }
-            .navigationTitle(Text("Breaking News"))
             .padding(8)
             .toolbar(content: {
-                NavigationLink {
-                    BookMarkView()
-                } label: {
-                    Image(systemName: "bookmark.fill")       
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("MyNews")
+                        .font(.title)
+                        .bold()
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Image(systemName: "gearshape.fill")
+                    }
                 }
 
 
