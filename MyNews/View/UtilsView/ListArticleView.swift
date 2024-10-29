@@ -24,7 +24,9 @@ struct ListArticleView: View {
             }
             .padding()
             .navigationTitle(Text(title))
+            #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
         }
     }
 }

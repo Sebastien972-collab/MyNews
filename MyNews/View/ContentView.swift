@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    enum Selection {
-        case home, flux,  search, discover, account, bookMark
-    }
-    @State private var selection = Selection.home
+    
+    @State private var selection = TabViewSelection.home
     @StateObject private var favoriteNews = FavoriteNewsManager()
     var body: some View {
         TabView(selection: $selection) {
@@ -19,17 +17,17 @@ struct ContentView: View {
                 .tabItem {
                     Label("Now", systemImage: "newspaper")
                 }
-                .tag(Selection.home)
+                .tag(TabViewSelection.home)
             DiscoverView()
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
-                .tag(Selection.search)
+                .tag(TabViewSelection.search)
             FluxView()
                 .tabItem {
                     Label("Abonnements", systemImage: "checkmark.rectangle.stack.fill")
                 }
-                .tag(Selection.flux)
+                .tag(TabViewSelection.flux)
         }
         .environmentObject(favoriteNews)
     }

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 class LinkManager: ObservableObject {
     @Published var linkTapped: String = ""
@@ -62,13 +61,13 @@ class LinkManager: ObservableObject {
     
     ///Une fonction qui récupère lun lien dans le presse papier.
     func getClipboardContent() {
-        guard linkTapped.isEmpty else {
-            return
-        }
-        if let string = UIPasteboard.general.url {
-            linkTapped = "\(string)"
-        } else {
-            print("Le presse-papiers ne contient pas de texte.")
-        }
+//        guard linkTapped.isEmpty else {
+//            return
+//        }
+//        if let string = UIPasteboard.general.url {
+//            linkTapped = "\(string)"
+//        } else {
+//            print("Le presse-papiers ne contient pas de texte.")
+//        }
     }
 }

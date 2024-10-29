@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @StateObject var loginManager: LoginViewModel = LoginViewModel()
+    
     var body: some View {
         Form {
             Section {
@@ -19,8 +21,19 @@ struct SettingsView: View {
                 NavigationLink {
                     ConnectionView(selection: .signUp)
                 } label: {
-                    Label("Créer un compte ", systemImage: "person.fill.badge.plus")
+                    Label("Créer un compte", systemImage: "person.fill.badge.plus")
                 }
+                if loginManager.isAuth() {
+                    HStack {
+                        Image(systemName: "person.crop.circle")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                        VStack(content: {
+                            Text("Username")
+                        })
+                    }
+                }
+                
             } header: {
                 Text("Compte")
             }
@@ -46,7 +59,7 @@ struct SettingsView: View {
                 }
 
                 NavigationLink {
-                    Text("Apparences settings")
+                    ApparenceView()
                 } label: {
                     Label("Apparence", systemImage: "moonset.circle.fill")
                 }

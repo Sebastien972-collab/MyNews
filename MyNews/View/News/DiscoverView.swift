@@ -78,6 +78,7 @@ struct DiscoverView: View {
             .navigationTitle(Text("Discover"))
             .toolbar(content: {
                 if fieldIsFocused {
+#if !os(macOS)
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
                             fieldIsFocused.toggle()
@@ -91,6 +92,8 @@ struct DiscoverView: View {
                             }
                         })
                     }
+#endif
+                    
                 }
             })
             

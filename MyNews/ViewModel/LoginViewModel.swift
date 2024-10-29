@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 
 class LoginViewModel: ObservableObject {
-    enum TypeOfConnectionSelection: String {
+    enum TypeOfConnectionSelection: String, CaseIterable {
     case signIn = "Se connecter "
     case signUp = "Créer un compte"
     }
@@ -22,5 +22,13 @@ class LoginViewModel: ObservableObject {
     func signUp() {
     }
     func signIn() {
+    }
+    
+    func isAuth() -> Bool {
+        if Auth.auth().currentUser != nil {
+            return true
+        } else {
+            return false
+        }
     }
 }

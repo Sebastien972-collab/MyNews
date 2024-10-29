@@ -38,7 +38,9 @@ struct NewsDetailView: View {
                     Text("Lire plus")
                 }
                 .navigationDestination(isPresented: $safariViewIsPresented) {
+                    #if !os(macOS)
                     SafariView(url: article.url)
+                    #endif
                 }
                 Spacer()
                 ShareLink(item: article.url, subject: Text(article.title), message: Text(article.description), preview: SharePreview("Icon", image: Image(.myNewsLogo))) {
@@ -48,6 +50,7 @@ struct NewsDetailView: View {
         }
         .padding()
         .toolbar(content: {
+            #if !os(macOS)
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     favoriteNewsVm.saveRecipe(article)
@@ -57,6 +60,7 @@ struct NewsDetailView: View {
                 }
                 
             }
+            #endif
         })
         
     }

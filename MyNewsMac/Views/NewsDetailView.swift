@@ -7,12 +7,16 @@
 
 import SwiftUI
 
-struct NewsDetailView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    NewsDetailView()
-}
+//struct NewsDetailView: View {
+//    let article: Article
+//    @State private var safariViewIsPresented = false
+//  //  @EnvironmentObject private var favoriteNewsVm:  FavoriteNewsManager
+//    
+//    var body: some View {
+//        Text(article.title)
+//    }
+//}
+//
+//#Preview {
+//    NewsDetailView(article: .preview)
+//}

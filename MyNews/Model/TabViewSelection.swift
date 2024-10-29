@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+enum TabViewSelection {
+    case home, flux,  search, discover, account, bookMark
+}
