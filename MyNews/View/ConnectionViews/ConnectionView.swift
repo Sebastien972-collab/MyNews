@@ -7,6 +7,7 @@
 
 import SwiftUI
 import _AuthenticationServices_SwiftUI
+import GoogleSignInSwift
 
 struct ConnectionView: View {
     var selection: LoginViewModel.TypeOfConnectionSelection
@@ -25,7 +26,7 @@ struct ConnectionView: View {
                 CustomTextField(isSecureField: true, hint: "Password", text: $loginManger.password, contentype: .password)
             })
             .padding(.vertical)
-                
+            
             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                 Text(selection.rawValue)
                     .fontWeight(.semibold)
@@ -33,14 +34,33 @@ struct ConnectionView: View {
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 15, style: .continuous)
                         .fill(.black.opacity(0.05)))
-                    
+                
             })
+            Divider()
+            VStack {
+                SignInWithAppleButton(selection == .signIn ? .signIn : .signUp,
+                                      onRequest: { request in
+                    
+                },
+                                      onCompletion: { result in
+                    
+                }
+                )
+                .frame(maxHeight: 45)
+                GoogleSignInButton {
+                }
+                .frame(maxHeight: 45)
+            }
+            .frame(maxWidth: 200)
             Spacer()
                 .navigationTitle(selection.rawValue)
                 .navigationBarTitleDisplayMode(.inline)
+            
+            
         }
         .padding()
     }
+    
 }
 
 #Preview {

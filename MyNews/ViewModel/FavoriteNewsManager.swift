@@ -12,7 +12,7 @@ class FavoriteNewsManager: SearchNewsManager {
     
     init() {
         super.init(service: .shared)
-         refresh()
+        news = favoriteNews.all
     }
     init(service: NewsService, favoriteNews: FavoriteNews) {
         super.init(service: service)
@@ -35,8 +35,8 @@ class FavoriteNewsManager: SearchNewsManager {
     }
     
     override func refresh() {
-//        news = favoriteNews.all
-//        super.refresh()
+        news = favoriteNews.all
+       // super.refresh()
     }
     
     
