@@ -8,43 +8,45 @@
 import SwiftUI
 
 struct HomeImageBubble: View {
-    @Environment(\.colorScheme) var colorScheme
     var article: Article
     
     var body: some View {
-        VStack(spacing: 5) {
+        ZStack(alignment: .bottom) {
+            // L'image de fond
             if let url = article.urlToImage {
-                AsyncImage(url: URL(string: (url))) { image in
-                    image
-                        .resizable()
+                AsyncImage(url: URL(string: url)) { image in
+                    image.resizable()
                         .aspectRatio(contentMode: .fill)
-                        
                 } placeholder: {
                     ProgressView()
-                        .frame(width: 80, height: 80)
                 }
-            } else {
-                Image(systemName: "network")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
             }
             
+            // Le panneau "Glass" superposé
             VStack(alignment: .leading, spacing: 5) {
-                Text(article.source.name)
+                Text(article.source.name.uppercased())
+                    .font(.caption2)
+                    .fontWeight(.heavy)
+                    .foregroundColor(.secondary)
+                
                 Text(article.description)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(2)
-                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                    .font(.subheadline)
                     .bold()
+                    .lineLimit(2)
+                    .foregroundColor(.primary)
             }
-            .padding(5)
-            
-            
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(.ultraThinMaterial) // C'est ici que la magie opère
+            .cornerRadius(0)
         }
-        .frame(width: 350, height: 350)
-        .clipShape(RoundedRectangle(cornerRadius: 15))
-        .clipped()
-        
+        .frame(width: 320, height: 220)
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 24)
+                .stroke(.white.opacity(0.3), lineWidth: 1)
+        )
+        .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 10)
     }
 }
 

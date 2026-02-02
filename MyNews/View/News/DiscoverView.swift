@@ -9,102 +9,121 @@ import SwiftUI
 
 struct DiscoverView: View {
     @State private var allTheme = ["Politique", "Gaming", "Sport", "Education","Santé", "Monde", "Culture","Environnement", "Météo"]
-    @State private var searchViewIsPresented = false
     @StateObject private var searchNews: SearchNewsManager = SearchNewsManager(service: .shared)
     @FocusState private var fieldIsFocused: Bool
-    @State private var okButtonOpacity: Double = 0
+    
+    // Configuration de la grille pour un look moderne
+    let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         NavigationStack {
-            ScrollView(content: {
-                VStack {
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .padding()
-                        TextField("", text: $searchNews.search, prompt: Text("Theme to search"))
-                            .padding(10)
-                            .onSubmit {
-                                searchNews.launchSearch()
-                            }
-                            .submitLabel(.search)
-                            .focused($fieldIsFocused)
-                    }
-                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray))
-                    .shadow(color: .gray, radius: 10)
-                    .padding()
-                    
-                    Picker("", selection: $searchNews.selection) {
-                        ForEach(SearchNewsManager.Selection.allCases, id: \.self) { selection in
-                            Text(selection.rawValue)
-                                .tag(selection)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    .padding(.horizontal)
-                    .padding(.bottom)
-                    ForEach(searchNews.selection == .suggestion ? filterTheme : searchNews.recentSearchs, id: \.self) { theme in
-                        Button(action: {
-                            searchNews.search = theme
-                            searchNews.launchSearch()
-                        }, label: {
-                            HStack {
-                                Text(theme)
-                                    .foregroundStyle(searchNews.selection == .suggestion ? .blue : .secondary)
-                                    .italic(searchNews.selection == .suggestion ? false : true)
-                                if searchNews.selection == .recent {
-                                    Button {
-                                        withAnimation {
-                                            searchNews.remove(theme)
-                                        }
-                                    } label: {
-                                        Text("X")
-                                    }
+            ZStack {
+                // Fond liquide cohérent
+                LinearGradient(colors: [.purple.opacity(0.1), .blue.opacity(0.15), .white],
+                               startPoint: .topLeading,
+                               endPoint: .bottomTrailing)
+                    .ignoresSafeArea()
+                
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 25) {
+                        
+                        // --- SEARCH BAR LIQUIDE ---
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.secondary)
+                            
+                            TextField("Rechercher un thème...", text: $searchNews.search)
+                                .focused($fieldIsFocused)
+                                .submitLabel(.search)
+                                .onSubmit { searchNews.launchSearch() }
+                            
+                            if !searchNews.search.isEmpty {
+                                Button { searchNews.search = "" } label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.secondary)
                                 }
                             }
-                        })
+                        }
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .clipShape(Capsule())
+                        .overlay(Capsule().stroke(.white.opacity(0.5), lineWidth: 1))
+                        .shadow(color: .black.opacity(0.05), radius: 10, y: 5)
+                        .padding(.horizontal)
+
+                        // --- SEGMENTED PICKER GLASS ---
+                        Picker("", selection: $searchNews.selection) {
+                            ForEach(SearchNewsManager.Selection.allCases, id: \.self) { selection in
+                                Text(selection.rawValue).tag(selection)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                        .padding(.horizontal)
+
+                        // --- THEME CLOUD / RECENT SEARCHES ---
+                        VStack(alignment: .leading, spacing: 15) {
+                            Text(searchNews.selection == .suggestion ? "Suggestions" : "Recherches récentes")
+                                .font(.headline)
+                                .padding(.horizontal)
+
+                            LazyVGrid(columns: columns, spacing: 15) {
+                                ForEach(searchNews.selection == .suggestion ? filterTheme : searchNews.recentSearchs, id: \.self) { theme in
+                                    themeTile(theme: theme)
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
                     }
-                    
+                    .padding(.top)
                 }
-            })
-            .alert(searchNews.newsError.localizedDescription, isPresented: $searchNews.showError) {
-                Button("Ok", role: .cancel) { }
             }
-            .onAppear() {
-                searchNews.resetPage()
-            }
+            .navigationTitle("Discover")
             .navigationDestination(isPresented: $searchNews.isComplete) {
                 NewsListView(searchNews: searchNews)
             }
-            .navigationTitle(Text("Discover"))
-            .toolbar(content: {
-                if fieldIsFocused {
-#if !os(macOS)
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            fieldIsFocused.toggle()
-                        } label: {
-                            Text("OK")
-                        }
-                        .opacity(okButtonOpacity)
-                        .onAppear(perform: {
-                            withAnimation(.easeIn(duration: 0.5)) {
-                                okButtonOpacity = 1
-                            }
-                        })
-                    }
-#endif
-                    
-                }
-            })
-            
         }
     }
-    private var filterTheme: [String] {
-        if searchNews.search.isEmpty {
-            return allTheme
-        } else {
-            return allTheme.filter { $0.localizedCaseInsensitiveContains(searchNews.search) }
+
+    // Tuile de thème style "Liquid Glass"
+    @ViewBuilder
+    func themeTile(theme: String) -> some View {
+        Button {
+            searchNews.search = theme
+            searchNews.launchSearch()
+        } label: {
+            HStack {
+                Text(theme)
+                    .fontWeight(.medium)
+                Spacer()
+                if searchNews.selection == .recent {
+                    Button {
+                        withAnimation { searchNews.remove(theme) }
+                    } label: {
+                        Image(systemName: "xmark")
+                            .font(.caption2)
+                            .padding(4)
+                            .background(.ultraThinMaterial)
+                            .clipShape(Circle())
+                    }
+                } else {
+                    Image(systemName: "arrow.up.right.circle.fill")
+                        .symbolRenderingMode(.hierarchical)
+                }
+            }
+            .padding()
+            .frame(height: 60)
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.white.opacity(0.4), lineWidth: 1)
+            )
+            .foregroundColor(.primary)
         }
+    }
+
+    private var filterTheme: [String] {
+        searchNews.search.isEmpty ? allTheme : allTheme.filter { $0.localizedCaseInsensitiveContains(searchNews.search) }
     }
 }
 

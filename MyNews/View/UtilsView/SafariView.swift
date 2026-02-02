@@ -7,27 +7,30 @@
 
 import SwiftUI
 import SafariServices
-import WebKit
-struct SafariView : UIViewControllerRepresentable {
+
+struct SafariView: UIViewControllerRepresentable {
     let url: String
-        
-        func makeUIViewController(context: Context) -> UIViewController {
-            let viewController = UIViewController()
-            let webView = WKWebView(frame: viewController.view.frame, configuration: configureWebView())
-            viewController.view.addSubview(webView)
-            webView.load(URLRequest(url: URL(string: url)!))
-            return viewController
+
+    func makeUIViewController(context: Context) -> SFSafariViewController {
+        // Validation de l'URL pour éviter le crash au cas où elle serait mal formée
+        guard let url = URL(string: self.url) else {
+            // URL de secours ou gestion d'erreur
+            return SFSafariViewController(url: URL(string: "https://google.com")!)
         }
         
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-            if let webView = uiViewController.view.subviews.first as? WKWebView {
-                webView.load(URLRequest(url: URL(string: url)!))
-            }
-        }
+        let configuration = SFSafariViewController.Configuration()
+        configuration.entersReaderIfAvailable = true // UX : Ouvre directement en mode lecture si possible
         
-        private func configureWebView() -> WKWebViewConfiguration {
-            let configuration = WKWebViewConfiguration()
-            configuration.websiteDataStore = WKWebsiteDataStore.nonPersistent()
-            return configuration
-        }
+        let safariVC = SFSafariViewController(url: url, configuration: configuration)
+        
+        // Personnalisation Liquid Glass : on adapte les couleurs de l'interface Safari
+        safariVC.preferredControlTintColor = .systemBlue
+        safariVC.dismissButtonStyle = .close
+        
+        return safariVC
+    }
+
+    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {
+        // Pas de mise à jour nécessaire pour Safari
+    }
 }

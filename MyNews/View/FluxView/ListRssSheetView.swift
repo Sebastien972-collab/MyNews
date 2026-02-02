@@ -11,65 +11,59 @@ struct ListRssSheetView: View {
     @ObservedObject var linkManager: LinkManager
     @Binding var showSheetView: Bool
     @FocusState private var isFocused: Bool
-    @State private var okButtonOpacity: Double = 0 
+    @State private var okButtonOpacity: Double = 0
 
     var body: some View {
         NavigationStack {
-            List {
-                Section {
-                    HStack {
-                        TextField("Ajoutez un lien ", text: $linkManager.linkTapped)
-                            .focused($isFocused)
-                            .padding(10)
-                            .onAppear {
-                                linkManager.getClipboardContent()
-                            }
-                        Button {
-                            withAnimation {
-                                linkManager.addLink()
-                            }
-                            print("Button pressed")
+            ScrollView {
+                VStack(spacing: 25) {
+                    // --- INPUT CARD ---
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Nouvelle Source")
+                            .font(.caption).bold()
+                            .foregroundColor(.secondary)
+                            .padding(.leading, 5)
+                        
+                        HStack {
+                            TextField("URL du flux RSS", text: $linkManager.linkTapped)
+                                .focused($isFocused)
+                                .onAppear { linkManager.getClipboardContent() }
                             
-                        } label: {
-                            Text("Add")
-                                .bold()
-                                .foregroundStyle(linkManager.linkTapped.isEmpty ? .gray : .blue)
-                                .animation(.easeInOut(duration: 2), value: linkManager.linkTapped)
-                        }
-                    }
-                }
-                
-                RSSListSection(linkManager: linkManager, header: "Vérifier", status: .checked)
-                RSSListSection(linkManager: linkManager, header: "En attente", status: .pending)
-                RSSListSection(linkManager: linkManager, header: "Lien érroné", status: .bad)
-                RSSListSection(linkManager: linkManager, header: "Non Approuvé", status: .unapproved)
-            }
-            .toolbar {
-                if isFocused {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button {
-                            isFocused.toggle()
-                        } label: {
-                            Text("OK")
-                        }
-                        .opacity(okButtonOpacity)
-                        .onAppear(perform: {
-                            withAnimation(.easeIn(duration: 0.5)) {
-                                okButtonOpacity = 1
+                            Button {
+                                withAnimation(.spring()) { linkManager.addLink() }
+                            } label: {
+                                Image(systemName: "plus.circle.fill")
+                                    .font(.title2)
+                                    .foregroundStyle(linkManager.linkTapped.isEmpty ? .gray : .blue)
                             }
-                        })
+                            .disabled(linkManager.linkTapped.isEmpty)
+                        }
+                        .padding()
+                        .background(Color.primary.opacity(0.05))
+                        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
                     }
+                    .padding()
+                    .background(.ultraThinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                    .padding(.horizontal)
+
+                    // --- SECTIONS DE STATUT ---
+                    // On appelle ici tes sections filtrées (Vérifié, En attente, etc.)
+                    // Elles utilisent le composant RSSListSection refondu
+                    VStack(spacing: 20) {
+                        RSSListSection(linkManager: linkManager, header: "Vérifiés", status: .checked)
+                        RSSListSection(linkManager: linkManager, header: "En attente", status: .pending)
+                    }
+                    .padding(.horizontal)
                 }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        showSheetView.toggle()
-                    }, label: {
-                        Text("Done")
-                    })
-                }
+                .padding(.top)
             }
-            .alert(linkManager.linkError.localizedDescription, isPresented: $linkManager.showLinkError) {
-                Button("Ok", role: .cancel) { }
+            .navigationTitle("Gérer les liens")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Terminer") { showSheetView.toggle() }.bold()
+                }
             }
         }
     }

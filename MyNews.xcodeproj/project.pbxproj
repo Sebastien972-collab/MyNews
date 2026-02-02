@@ -107,6 +107,9 @@
 		CFE6C59B29E85F3900CEF6D7 /* FakeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE6C59A29E85F3900CEF6D7 /* FakeResponse.swift */; };
 		CFE6C59D29E85F6000CEF6D7 /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE6C59C29E85F6000CEF6D7 /* FakeResponseData.swift */; };
 		CFE84B8229EB740C0031746E /* HomeViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE84B8129EB740C0031746E /* HomeViewManager.swift */; };
+		CFF41A9E2F315EC00037D5C9 /* RSSListSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF41A9D2F315EC00037D5C9 /* RSSListSectionView.swift */; };
+		CFF41AA02F315F520037D5C9 /* LinkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF41A9F2F315F520037D5C9 /* LinkStatus.swift */; };
+		CFF41AA12F315F520037D5C9 /* LinkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF41A9F2F315F520037D5C9 /* LinkStatus.swift */; };
 		CFFDCAA729CD8CDC001A8A8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFFDCAA629CD8CDC001A8A8B /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -189,6 +192,8 @@
 		CFE6C59A29E85F3900CEF6D7 /* FakeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponse.swift; sourceTree = "<group>"; };
 		CFE6C59C29E85F6000CEF6D7 /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
 		CFE84B8129EB740C0031746E /* HomeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewManager.swift; sourceTree = "<group>"; };
+		CFF41A9D2F315EC00037D5C9 /* RSSListSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSListSectionView.swift; sourceTree = "<group>"; };
+		CFF41A9F2F315F520037D5C9 /* LinkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkStatus.swift; sourceTree = "<group>"; };
 		CFFDCAA629CD8CDC001A8A8B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -310,6 +315,7 @@
 		63AB9C4C2BD37F880044F765 /* FluxView */ = {
 			isa = PBXGroup;
 			children = (
+				CFF41A9D2F315EC00037D5C9 /* RSSListSectionView.swift */,
 				63CABB532BF3EC9300290D23 /* UtilsView */,
 				63AB9C4D2BD37FAF0044F765 /* FluxView.swift */,
 				63F5A4822BEDA4D900F72CFA /* ListRssSheetView.swift */,
@@ -427,6 +433,7 @@
 		CFBAB99F29B8256A006FDF8A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CFF41A9F2F315F520037D5C9 /* LinkStatus.swift */,
 				6306E4AF2A5C994100FB01D8 /* CoreData */,
 				CF5EFE8D29B88EE9002598C3 /* Error */,
 				CFBAB9AD29B84C4B006FDF8A /* News */,
@@ -611,7 +618,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					634FA4E32BFAC99400988303 = {
 						CreatedOnToolsVersion = 15.4;
@@ -704,6 +711,7 @@
 				632645E02C1F6D3A00999D8C /* FavoriteNewsManager.swift in Sources */,
 				632645DE2C1F6D3500999D8C /* SearchNewsManager.swift in Sources */,
 				632645E22C1F6D4000999D8C /* LinkManager.swift in Sources */,
+				CFF41AA12F315F520037D5C9 /* LinkStatus.swift in Sources */,
 				632645F02C1F72DA00999D8C /* FluxView.swift in Sources */,
 				632645EC2C1F72B400999D8C /* HomeView.swift in Sources */,
 				632645DF2C1F6D3700999D8C /* HomeViewManager.swift in Sources */,
@@ -733,6 +741,7 @@
 				CFBAB9B229B85B2C006FDF8A /* HomeImageBubble.swift in Sources */,
 				63BB45A22BF3D737004B9E71 /* FluxViewManager.swift in Sources */,
 				6306E4AE2A5C98FC00FB01D8 /* MyNewsCD.xcdatamodeld in Sources */,
+				CFF41A9E2F315EC00037D5C9 /* RSSListSectionView.swift in Sources */,
 				632645E72C1F6EDF00999D8C /* TabViewSelection.swift in Sources */,
 				63BB45A42BF3DAC4004B9E71 /* RSSError.swift in Sources */,
 				CFBAB9A929B84A34006FDF8A /* NewsService.swift in Sources */,
@@ -766,6 +775,7 @@
 				CF5EFE8A29B866C0002598C3 /* ThemeButton.swift in Sources */,
 				63F5A4852BEE29D900F72CFA /* FavoriteLinks.swift in Sources */,
 				632107FF2BFA95CB00902A3D /* ShareSheet.swift in Sources */,
+				CFF41AA02F315F520037D5C9 /* LinkStatus.swift in Sources */,
 				CFE84B8229EB740C0031746E /* HomeViewManager.swift in Sources */,
 				CF5EFE9129C008AF002598C3 /* NewsDetailView.swift in Sources */,
 			);
@@ -811,9 +821,10 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_ASSET_PATHS = "\"MyNewsMac/Preview Content\"";
-				DEVELOPMENT_TEAM = P9TXP3LGTK;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
@@ -846,9 +857,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"MyNewsMac/Preview Content\"";
-				DEVELOPMENT_TEAM = P9TXP3LGTK;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
@@ -903,6 +915,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = P9TXP3LGTK;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -925,6 +938,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -965,6 +979,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = P9TXP3LGTK;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -980,6 +995,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -995,7 +1011,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"MyNews/Preview Content\"";
-				DEVELOPMENT_TEAM = P9TXP3LGTK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyNews/Info.plist;
@@ -1034,7 +1049,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"MyNews/Preview Content\"";
-				DEVELOPMENT_TEAM = P9TXP3LGTK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyNews/Info.plist;
@@ -1071,7 +1085,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = P9TXP3LGTK;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
@@ -1094,7 +1107,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P9TXP3LGTK;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;

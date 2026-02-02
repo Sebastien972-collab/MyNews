@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftUICore
+import SwiftUI
 
 // Enum pour représenter les trois modes
  enum AppAppearance: String, CaseIterable {
