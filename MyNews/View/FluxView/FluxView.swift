@@ -69,7 +69,7 @@ struct FluxView: View {
             .sheet(isPresented: $showSheetView) {
                 ListRssSheetView(linkManager: fluxManager.linkManager, showSheetView: $showSheetView)
                     .presentationDetents([.medium, .large])
-                    .presentationBackground(.ultraThinMaterial) // La sheet est aussi en verre !
+                    .presentationBackground(.ultraThinMaterial)
             }
             .onAppear(){
                 if !fluxManager.linkManager.fluxLinks.isEmpty && fluxManager.items.isEmpty {
