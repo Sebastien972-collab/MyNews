@@ -65,6 +65,11 @@ struct ListRssSheetView: View {
                     Button("Terminer") { showSheetView.toggle() }.bold()
                 }
             }
+            .alert("Impossible d'ajouter le lien", isPresented: $linkManager.showLinkError) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(linkManager.linkError.localizedDescription)
+            }
         }
     }
 }

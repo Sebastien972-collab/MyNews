@@ -37,7 +37,7 @@ struct RSSListSection: View {
                                     .foregroundColor(.blue.opacity(0.7))
                                     .font(.footnote)
                                 
-                                Text(link.status.rawValue)
+                                Text(link.link)
                                     .font(.subheadline)
                                     .lineLimit(1)
                                     .foregroundColor(.primary)
@@ -81,4 +81,3 @@ struct RSSListSection: View {
         }
     }
 }
-
