@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A11000000000000000000001 /* RSSFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11000000000000000000002 /* RSSFoundationTests.swift */; };
 		63031E162A5CA75400C72A7D /* FavoriteNewsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63031E152A5CA75400C72A7D /* FavoriteNewsManager.swift */; };
 		63031E182A5E88FD00C72A7D /* ListArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63031E172A5E88FD00C72A7D /* ListArticleView.swift */; };
 		6306E4AB2A5C988300FB01D8 /* BookMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6306E4AA2A5C988300FB01D8 /* BookMarkView.swift */; };
@@ -124,6 +125,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A11000000000000000000002 /* RSSFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFoundationTests.swift; sourceTree = "<group>"; };
 		63031E152A5CA75400C72A7D /* FavoriteNewsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteNewsManager.swift; sourceTree = "<group>"; };
 		63031E172A5E88FD00C72A7D /* ListArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListArticleView.swift; sourceTree = "<group>"; };
 		6306E4AA2A5C988300FB01D8 /* BookMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkView.swift; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 		CFE6C58729E85C5D00CEF6D7 /* MyNewsTests */ = {
 			isa = PBXGroup;
 			children = (
+				A11000000000000000000002 /* RSSFoundationTests.swift */,
 				63976B5C2B60E92200F847EE /* FavoriteNews */,
 				CFD4BCC829E87F1900522D69 /* NewsSearch */,
 				CFE6C59729E85EB100CEF6D7 /* NewsServiceTest */,
@@ -785,6 +788,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A11000000000000000000001 /* RSSFoundationTests.swift in Sources */,
 				CFE6C59B29E85F3900CEF6D7 /* FakeResponse.swift in Sources */,
 				CFC9950629ECC83A001AB5E5 /* HomeVMTest.swift in Sources */,
 				CFD4BCCC29E87FCC00522D69 /* NewsErrorTest.swift in Sources */,

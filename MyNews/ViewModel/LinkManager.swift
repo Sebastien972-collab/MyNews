@@ -11,10 +11,15 @@ class LinkManager: ObservableObject {
     @Published var linkTapped: String = ""
     @Published var linkError: Error = LinkError.uknowError
     @Published var showLinkError: Bool = false
-    @Published var fluxLinks: [Link] = FavoriteLinks.shared.all
-    let favorLinksManager = FavoriteLinks.shared
+    @Published var fluxLinks: [Link]
+    let favorLinksManager: FavoriteLinks
     @Published var isEditing: Bool = false
     
+    init(favorLinksManager: FavoriteLinks = .shared) {
+        self.favorLinksManager = favorLinksManager
+        self.fluxLinks = favorLinksManager.all
+    }
+
     // MARK: - Links Tools
     ///Refresh LinkManager
     func refresh() {
@@ -22,6 +27,7 @@ class LinkManager: ObservableObject {
     }
     ///Ajoute un lien dans fluxlinks
     func addLink() {
+        linkTapped = linkTapped.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !linkTapped.isEmpty else {
             return
         }
@@ -30,7 +36,8 @@ class LinkManager: ObservableObject {
             linkTapped.removeAll()
             return showLinkError.toggle()
         }
-        guard URL(string: linkTapped) != nil else {
+        guard let url = URL(string: linkTapped), url.host != nil,
+              ["http", "https"].contains(url.scheme?.lowercased() ?? "") else {
             linkTapped.removeAll()
             linkError = LinkError.invalidField
             return showLinkError.toggle()
@@ -39,7 +46,7 @@ class LinkManager: ObservableObject {
         do {
             let newLink = Link(link: linkTapped)
             try favorLinksManager.saveArticle(link: newLink)
-            fluxLinks.append(newLink)
+            refresh()
         } catch  {
             linkError = error
             showLinkError.toggle()
@@ -50,9 +57,12 @@ class LinkManager: ObservableObject {
     }
     ///Supprime un lie
     func removeLink(_ offset: IndexSet) {
-        fluxLinks.remove(atOffsets: offset)
         do {
-            try favorLinksManager.removeElement(offset)
+            let linksToRemove = offset.compactMap { fluxLinks.indices.contains($0) ? fluxLinks[$0] : nil }
+            for link in linksToRemove {
+                try favorLinksManager.removeElementInFavorite(link: link)
+            }
+            refresh()
         } catch  {
             linkError = error
             showLinkError.toggle()

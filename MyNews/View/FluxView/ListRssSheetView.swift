@@ -53,6 +53,7 @@ struct ListRssSheetView: View {
                     VStack(spacing: 20) {
                         RSSListSection(linkManager: linkManager, header: "Vérifiés", status: .checked)
                         RSSListSection(linkManager: linkManager, header: "En attente", status: .pending)
+                        RSSListSection(linkManager: linkManager, header: "Indisponibles", status: .bad)
                     }
                     .padding(.horizontal)
                 }

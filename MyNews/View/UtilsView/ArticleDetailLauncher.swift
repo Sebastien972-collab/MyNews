@@ -1,3 +1,5 @@
+// Created by Sébastien DAGUIN
+
 import SwiftUI
 #if canImport(FoundationModels)
 import FoundationModels
@@ -87,11 +89,7 @@ struct ArticleDetailLauncher<Label: View>: View {
             .disabled(isPreparing)
 
             NavigationLink(isActive: $shouldNavigate) {
-                NewsDetailView(
-                    article: article,
-                    rewrittenTitle: rewrittenTitle,
-                    rewrittenContent: rewrittenContent
-                )
+                NewsDetailView(article: article)
             } label: {
                 EmptyView()
             }

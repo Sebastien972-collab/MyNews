@@ -8,7 +8,7 @@
 import Foundation
 
 enum RSSError : Error {
-    case invalidField, fieldEmpty, noRssFound ,uknowError
+    case invalidField, fieldEmpty, noRssFound, unavailableSources, uknowError
 }
 
 extension RSSError : LocalizedError {
@@ -20,6 +20,8 @@ extension RSSError : LocalizedError {
             return NSLocalizedString("Oups... Ce champ ne peut pas être vide", comment: "Champ vide")
         case .noRssFound :
             return NSLocalizedString("Oups... Nous n'avons rien trouver pour cette recherche.", comment: "Pas de news trouver")
+        case .unavailableSources:
+            return NSLocalizedString("Certaines sources sont indisponibles. Les articles déjà enregistrés sont conservés.", comment: "Erreur de mise à jour RSS")
         case .uknowError :
             return NSLocalizedString("Une erreur inconnue est survenue", comment: "Unknow Error")
         }
