@@ -14,6 +14,10 @@ struct Link: Hashable, Equatable {
     let link : String
     var status: StatusLink = .pending
     
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(link)
+    }
+
     static func ==(lhs: Link, rhs: Link) -> Bool {
             return lhs.link == rhs.link
         }

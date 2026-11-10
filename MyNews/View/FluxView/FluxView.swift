@@ -71,10 +71,14 @@ struct FluxView: View {
                     .presentationDetents([.medium, .large])
                     .presentationBackground(.ultraThinMaterial)
             }
-            .onAppear(){
-                if !fluxManager.linkManager.fluxLinks.isEmpty && fluxManager.items.isEmpty {
-                    fluxManager.refresh()
-                }
+            .alert("Mise à jour des flux", isPresented: $fluxManager.showError) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(fluxManager.error.localizedDescription)
+            }
+            .onAppear { fluxManager.refresh() }
+            .onChange(of: showSheetView) { _, isPresented in
+                if !isPresented { fluxManager.refresh() }
             }
         }
     }

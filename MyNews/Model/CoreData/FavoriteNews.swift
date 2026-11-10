@@ -32,7 +32,7 @@ class FavoriteNews {
     var all : [Article] {
         var favoriteNews : [Article] = []
         for article in cdArticles {
-            let newArticle = Article(source: Source(name: article.sourceName ?? ""), author: article.author ?? "", title: article.title ?? "", description: article.description, url: article.url ?? "", urlToImage: article.urlToImage ?? "", publishedAt: article.publishedAt ?? "", content: article.content ?? "")
+            let newArticle = Article(source: Source(name: article.sourceName ?? ""), author: article.author ?? "", title: article.title ?? "", description: article.articleDescription ?? "", url: article.url ?? "", urlToImage: article.urlToImage ?? "", publishedAt: article.publishedAt ?? "", content: article.content ?? "")
             favoriteNews.append(newArticle)
         }
         return favoriteNews

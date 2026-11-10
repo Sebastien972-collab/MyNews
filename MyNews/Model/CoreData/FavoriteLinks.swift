@@ -19,6 +19,7 @@ class FavoriteLinks {
     }
     private var cdLinks: [CDRssLink] {
         let request : NSFetchRequest<CDRssLink> = CDRssLink.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "links", ascending: true)]
         guard let favoriteCDNews = try? viewContext.fetch(request) else {
             return []
         }
@@ -35,7 +36,7 @@ class FavoriteLinks {
                 }
                 return .pending
             }
-            let newLink = Link(link: link.links ?? "")
+            let newLink = Link(link: link.links ?? "", status: status)
             favoriteLinks.append(newLink)
         }
         return favoriteLinks
@@ -51,10 +52,8 @@ class FavoriteLinks {
     }
     ///This function remove a existing recipe
     func removeElementInFavorite(link linkToRemove : Link) throws {
-        for (index ,link) in all.enumerated() {
-            if link == linkToRemove {
-                viewContext.delete(cdLinks[index])
-            }
+        for stored in cdLinks where stored.links == linkToRemove.link {
+            viewContext.delete(stored)
         }
         do {
             try viewContext.save()
@@ -63,15 +62,22 @@ class FavoriteLinks {
         }
     }
     func removeElement(_ indexSet: IndexSet) throws {
-        for index in indexSet.reversed() {
-            viewContext.delete(cdLinks[index])
+        let snapshot = cdLinks
+        for index in indexSet where snapshot.indices.contains(index) {
+            viewContext.delete(snapshot[index])
         }
-        do {
-            try viewContext.save()
-        } catch {
-            throw error
-        }
+        try viewContext.save()
     }
+
+    func updateStatuses(_ links: [Link]) throws {
+        for stored in cdLinks {
+            if let link = links.first(where: { $0.link == stored.links }) {
+                stored.status = link.status.rawValue
+            }
+        }
+        try viewContext.save()
+    }
+
     private func addNewArticleFavorite(link : Link) throws {
         let linkFav = CDRssLink(context: viewContext)
         linkFav.links = link.link
