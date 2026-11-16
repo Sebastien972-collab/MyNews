@@ -8,12 +8,14 @@
 import Foundation
 
 enum NewsError : Error {
-    case invalidField, pageLimit, fieldEmpty, noNewsFound ,uknowError
+    case unconfiguredService, invalidField, pageLimit, fieldEmpty, noNewsFound ,uknowError
 }
 
 extension NewsError : LocalizedError {
     var errorDescription: String? {
         switch self {
+        case .unconfiguredService:
+            return "Ce service d’actualités n’est pas configuré. Consultez vos sources RSS."
         case .invalidField :
             return NSLocalizedString("Le text n'est pas valide", comment: "Champ invalid")
         case .pageLimit :

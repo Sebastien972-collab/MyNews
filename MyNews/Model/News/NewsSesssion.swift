@@ -10,7 +10,7 @@ import Alamofire
 
 class NewsSession {
     func session(url: URLConvertible, callback: @escaping ( Result<Data, AFError>) -> Void) {
-        AF.request(url).responseData { data in
+        AF.request(url).validate(statusCode: 200..<300).responseData { data in
             callback(data.result)
         }
         

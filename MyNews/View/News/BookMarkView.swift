@@ -13,7 +13,7 @@ struct BookMarkView: View {
     var body: some View {
         ZStack {
             // Fond dégradé liquide (Aqua/Teal pour différencier des autres vues)
-            LinearGradient(colors: [.teal.opacity(0.1), .blue.opacity(0.1), .white],
+            LinearGradient(colors: [.teal.opacity(0.1), .blue.opacity(0.1), Color(.systemBackground)],
                            startPoint: .topLeading,
                            endPoint: .bottomTrailing)
                 .ignoresSafeArea()
@@ -42,12 +42,7 @@ struct BookMarkView: View {
                 .transition(.scale.combined(with: .opacity))
             } else {
                 // --- LISTE DES FAVORIS ---
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 0) {
-                        ListArticleView(newsManger: favoriteNewsVm, title: "Mes Favoris")
-                            .padding(.top)
-                    }
-                }
+                ListArticleView(newsManger: favoriteNewsVm, title: "Mes favoris")
             }
         }
         .navigationTitle("Favoris")

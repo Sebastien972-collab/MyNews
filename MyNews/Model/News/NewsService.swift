@@ -9,16 +9,29 @@ import Foundation
 
 class NewsService {
     static var shared = NewsService()
-    private init(){}
-    private var newsSession: NewsSession = NewsSession()
-    
-    init(session: NewsSession) {
+    private let newsSession: NewsSession
+    private let apiKey: String?
+
+    init(session: NewsSession = NewsSession(),
+         apiKey: String? = Bundle.main.object(forInfoDictionaryKey: "NewsAPIKey") as? String) {
         self.newsSession = session
-        
+        self.apiKey = apiKey
     }
     func launchSearch(search: String, page: Int, callback: @escaping (Bool, [Article]?, Error?) -> Void)  {
-        let searchToUrl = search.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        let baseUrl = URL(string: "https://newsapi.org/v2/everything?q=\(searchToUrl)&apiKey=3c9b682448ef413499e57b61c45dfc9b&language=fr&page=\(page)&pageSize=10")!
+        guard let apiKey, !apiKey.isEmpty else {
+            callback(false, nil, NewsError.unconfiguredService)
+            return
+        }
+        var components = URLComponents(string: "https://newsapi.org/v2/everything")!
+        components.queryItems = [URLQueryItem(name: "q", value: search),
+                                 URLQueryItem(name: "apiKey", value: apiKey),
+                                 URLQueryItem(name: "language", value: "fr"),
+                                 URLQueryItem(name: "page", value: String(page)),
+                                 URLQueryItem(name: "pageSize", value: "10")]
+        guard let baseUrl = components.url else {
+            callback(false, nil, NewsError.invalidField)
+            return
+        }
         launchSession(baseUrl: baseUrl) { success, news, error in
             callback(success, news, error)
         }

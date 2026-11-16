@@ -17,13 +17,25 @@ struct RSSItem: Identifiable, Hashable, Equatable, Codable {
     var link: String
     var description: String
     var descriptionDecode: String {
-        if let utf8Data = description.data(using: .utf8) {
-            if let descriptionDecoded = String(data: utf8Data, encoding: .utf8) {
-                return descriptionDecoded
-            }
-        }
-        return description
+        description
+            .replacingOccurrences(of: "<[^>]+>", with: " ", options: .regularExpression)
+            .replacingOccurrences(of: "&nbsp;", with: " ")
+            .replacingOccurrences(of: "&amp;", with: "&")
+            .replacingOccurrences(of: "&lt;", with: "<")
+            .replacingOccurrences(of: "&gt;", with: ">")
+            .replacingOccurrences(of: "&quot;", with: "\"")
+            .replacingOccurrences(of: "&#39;", with: "'")
+            .replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
+
+    var article: Article {
+        Article(source: Source(name: hostname), author: nil, title: title,
+                description: descriptionDecode, url: link, urlToImage: nil,
+                publishedAt: publishedDate.map { ISO8601DateFormatter().string(from: $0) } ?? pubDate,
+                content: descriptionDecode)
+    }
+
     var pubDate: String
     var dateFr: String {
         calculateTimeDifference(from: pubDate)

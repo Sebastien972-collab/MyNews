@@ -17,7 +17,9 @@ import SwiftUI
 
 class ApparenceManager: ObservableObject {
    
-     @Published var appearance: AppAppearance = .automatic
+     @Published var appearance: AppAppearance = AppAppearance(rawValue: UserDefaults.standard.string(forKey: "appearance") ?? "") ?? .automatic {
+        didSet { UserDefaults.standard.set(appearance.rawValue, forKey: "appearance") }
+    }
 
     // Fonction pour définir le mode en fonction du choix de l'utilisateur
     func colorScheme(for appearance: AppAppearance) -> ColorScheme? {

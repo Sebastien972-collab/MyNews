@@ -1,75 +1,45 @@
-//
-//  FluxView.swift
-//  MyNews
-//
-//  Created by Sebby on 20/04/2024.
-//
-
 import SwiftUI
 
 struct FluxView: View {
-    @StateObject private var fluxManager = FluxViewManager()
-    @State private var showSheetView: Bool = false
-    
+    @EnvironmentObject private var fluxManager: FluxViewManager
+    @State private var showSources = false
+    @State private var query = ""
+    var title = "Abonnements"
+    var showsSettings = false
+    var allowsSearch = false
+
+    private var filteredItems: [RSSItem] {
+        let text = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !text.isEmpty else { return fluxManager.items }
+        return fluxManager.items.filter {
+            $0.title.localizedCaseInsensitiveContains(text)
+                || $0.descriptionDecode.localizedCaseInsensitiveContains(text)
+                || $0.hostname.localizedCaseInsensitiveContains(text)
+        }
+    }
+
     var body: some View {
         NavigationStack {
-            ZStack {
-                // Fond liquide dynamique
-                LinearGradient(colors: [.orange.opacity(0.1), .purple.opacity(0.1), .white],
-                               startPoint: .topLeading,
-                               endPoint: .bottomTrailing)
-                    .ignoresSafeArea()
-                
-                if fluxManager.inProgress {
-                    // Loader en verre
-                    VStack(spacing: 15) {
-                        ProgressView()
-                            .scaleEffect(1.2)
-                        Text("Mise à jour...")
-                            .font(.caption).bold()
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(30)
-                    .background(.ultraThinMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 25))
-                } else if fluxManager.items.isEmpty {
-                    VStack(spacing: 20) {
-                        Image(systemName: "antenna.radiowaves.left.and.right")
-                            .font(.system(size: 50))
-                            .foregroundStyle(.tertiary)
-                        Text("Aucun flux détecté")
-                            .font(.headline)
-                            .foregroundColor(.secondary)
-                    }
+            Group {
+                if allowsSearch {
+                    articleList.searchable(text: $query, prompt: "Dans les articles de vos sources")
                 } else {
-                    ScrollView(showsIndicators: false) {
-                        LazyVStack(spacing: 16) {
-                            ForEach(fluxManager.items) { item in
-                                NavigationLink(destination: SafariView(url: item.link)) {
-                                    RssRow(rssItem: item)
-                                        .padding(.horizontal)
-                                }
-                            }
-                        }
-                        .padding(.top)
-                    }
-                    .refreshable { fluxManager.refresh() }
+                    articleList
                 }
             }
-            .navigationTitle("Abonnements")
+            .navigationTitle(title)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button { showSheetView.toggle() } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .symbolRenderingMode(.hierarchical)
-                            .font(.title2)
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button("Gérer les sources", systemImage: "plus.circle") { showSources = true }
+                    if showsSettings {
+                        NavigationLink { SettingsView() } label: {
+                            Label("Réglages", systemImage: "gearshape")
+                        }
                     }
                 }
             }
-            .sheet(isPresented: $showSheetView) {
-                ListRssSheetView(linkManager: fluxManager.linkManager, showSheetView: $showSheetView)
-                    .presentationDetents([.medium, .large])
-                    .presentationBackground(.ultraThinMaterial)
+            .sheet(isPresented: $showSources, onDismiss: { fluxManager.refresh() }) {
+                ListRssSheetView(linkManager: fluxManager.linkManager, showSheetView: $showSources)
             }
             .alert("Mise à jour des flux", isPresented: $fluxManager.showError) {
                 Button("OK", role: .cancel) { }
@@ -77,13 +47,34 @@ struct FluxView: View {
                 Text(fluxManager.error.localizedDescription)
             }
             .onAppear { fluxManager.refresh() }
-            .onChange(of: showSheetView) { _, isPresented in
-                if !isPresented { fluxManager.refresh() }
-            }
         }
     }
-}
 
-#Preview {
-    FluxView()
+    private var articleList: some View {
+        List {
+            if fluxManager.inProgress {
+                ProgressView("Mise à jour des sources…")
+            }
+            if filteredItems.isEmpty && !fluxManager.inProgress {
+                ContentUnavailableView {
+                    Label(query.isEmpty ? "Vos actualités" : "Aucun résultat", systemImage: "newspaper")
+                } description: {
+                    Text(query.isEmpty ? "Ajoutez vos sources RSS pour retrouver leurs articles ici." : "Essayez un autre mot dans les articles téléchargés de vos sources.")
+                } actions: {
+                    Button("Gérer mes sources") { showSources = true }
+                    Button("Actualiser") { fluxManager.refresh() }
+                }
+            }
+            ForEach(filteredItems) { item in
+                NavigationLink {
+                    NewsDetailView(article: item.article)
+                } label: {
+                    RssRow(rssItem: item)
+                }
+                .listRowSeparator(.hidden)
+            }
+        }
+        .listStyle(.plain)
+        .refreshable { await fluxManager.refreshAndWait() }
+    }
 }
