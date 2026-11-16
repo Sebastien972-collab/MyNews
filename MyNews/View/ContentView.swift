@@ -10,17 +10,19 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var selection = TabViewSelection.home
+    @StateObject private var fluxManager = FluxViewManager()
+    @AppStorage("appearance") private var appearance = AppAppearance.automatic.rawValue
     @StateObject private var favoriteNews = FavoriteNewsManager()
     var body: some View {
         TabView(selection: $selection) {
             HomeView()
                 .tabItem {
-                    Label("Now", systemImage: "newspaper")
+                    Label("Actualités", systemImage: "newspaper")
                 }
                 .tag(TabViewSelection.home)
             DiscoverView()
                 .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
+                    Label("Recherche", systemImage: "magnifyingglass")
                 }
                 .tag(TabViewSelection.search)
             FluxView()
@@ -30,6 +32,8 @@ struct ContentView: View {
                 .tag(TabViewSelection.flux)
         }
         .environmentObject(favoriteNews)
+        .environmentObject(fluxManager)
+        .preferredColorScheme(ApparenceManager().colorScheme(for: AppAppearance(rawValue: appearance) ?? .automatic))
     }
 }
 

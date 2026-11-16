@@ -14,7 +14,7 @@ struct ApparenceView: View {
     var body: some View {
         ZStack {
             // Fond dynamique pour voir l'effet de transparence en temps réel
-            LinearGradient(colors: [.purple.opacity(0.15), .blue.opacity(0.1), .white],
+            LinearGradient(colors: [.purple.opacity(0.15), .blue.opacity(0.1), Color(.systemBackground)],
                            startPoint: .topLeading,
                            endPoint: .bottomTrailing)
                 .ignoresSafeArea()

@@ -15,7 +15,7 @@ final class FavoriteNewsManagerTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        favoriteNewsManager = FavoriteNewsManager(service: NewsService(session: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData))), favoriteNews: FavoriteNews(persistenceController: PersistenceController(inMemory: true)))
+        favoriteNewsManager = FavoriteNewsManager(service: NewsService(session: NewsSessionFake(fakeResponse: Result.success(FakeResponseData.correctData)), apiKey: "test-key"), favoriteNews: FavoriteNews(persistenceController: PersistenceController(inMemory: true)))
     }
     
     func test() {

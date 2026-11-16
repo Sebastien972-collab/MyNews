@@ -10,6 +10,36 @@ import Alamofire
 @testable import MyNews
 
 final class RSSFoundationTests: XCTestCase {
+    func testRSSArticleBridgeAndHTMLPreview() {
+        let item = RSSItem(title: "Même titre", link: "https://example.com/one",
+                           description: "<p>A &amp; B</p>", pubDate: "2024-05-15T10:00:00Z")
+        XCTAssertEqual(item.descriptionDecode, "A & B")
+        XCTAssertEqual(item.article.url, item.link)
+        XCTAssertEqual(item.article.content, "A & B")
+        XCTAssertEqual(item.article.source.name, "example.com")
+    }
+
+    func testFavoritesWithIdenticalTitlesRemainIndependent() throws {
+        let repository = FavoriteNews(persistenceController: PersistenceController(inMemory: true))
+        let first = RSSItem(title: "Même titre", link: "https://example.com/one", description: "", pubDate: "").article
+        let second = RSSItem(title: "Même titre", link: "https://example.com/two", description: "", pubDate: "").article
+        try repository.saveArticle(article: first)
+        try repository.saveArticle(article: second)
+        XCTAssertEqual(repository.all.count, 2)
+        try repository.saveArticle(article: first)
+        XCTAssertEqual(repository.all.map(\.url), [second.url])
+    }
+
+    @MainActor
+    func testAwaitedRefreshCompletesWithNoSources() async {
+        let repository = FavoriteLinks(persistenceController: PersistenceController(inMemory: true))
+        let manager = FluxViewManager(fetcher: DeferredRSSFetcher(), store: MemoryRSSStore(),
+                                      linkManager: LinkManager(favorLinksManager: repository))
+        await manager.refreshAndWait()
+        XCTAssertFalse(manager.inProgress)
+        XCTAssertTrue(manager.items.isEmpty)
+    }
+
     private let feed = "https://example.com/feed"
 
     func testParserHandlesCDATAFragmentsAndAtom() throws {

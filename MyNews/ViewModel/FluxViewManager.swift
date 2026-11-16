@@ -16,6 +16,7 @@ class FluxViewManager: ObservableObject {
 
     private let fetcher: RSSFetching
     private let store: RSSItemStoring
+    private var refreshWaiters: [CheckedContinuation<Void, Never>] = []
 
     init(fetcher: RSSFetching = RSSFetcher(), store: RSSItemStoring = RSSItemStore(),
          linkManager: LinkManager = LinkManager()) {
@@ -34,11 +35,14 @@ class FluxViewManager: ObservableObject {
 
     func fetchRss() {
         guard !inProgress else { return }
+        linkManager.refresh()
         let links = linkManager.fluxLinks
         let activeSources = Set(links.map(\.link))
         items.removeAll { !activeSources.contains($0.sourceURL ?? "") }
         guard !links.isEmpty else {
+            showError = false
             do { try store.save([]) } catch { report(error) }
+            finishRefresh()
             return
         }
         inProgress = true
@@ -47,7 +51,6 @@ class FluxViewManager: ObservableObject {
             // Injectable fetchers may deliver on a background queue.
             DispatchQueue.main.async {
                 guard let self else { return }
-                defer { self.inProgress = false }
                 let currentSources = Set(self.linkManager.fluxLinks.map(\.link))
                 self.items.removeAll { !currentSources.contains($0.sourceURL ?? "") }
                 if currentSources != activeSources {
@@ -68,12 +71,28 @@ class FluxViewManager: ObservableObject {
                 }
                 if checked.contains(where: { $0.status == .bad }) { self.report(RSSError.unavailableSources) }
                 do { try self.store.save(self.items) } catch { self.report(error) }
+                self.finishRefresh()
             }
         }
     }
 
     func refresh() {
         fetchRss()
+    }
+
+    @MainActor
+    func refreshAndWait() async {
+        await withCheckedContinuation { continuation in
+            refreshWaiters.append(continuation)
+            fetchRss()
+        }
+    }
+
+    private func finishRefresh() {
+        inProgress = false
+        let waiters = refreshWaiters
+        refreshWaiters.removeAll()
+        waiters.forEach { $0.resume() }
     }
 
     private func report(_ error: Error) {

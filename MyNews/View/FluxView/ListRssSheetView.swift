@@ -27,6 +27,9 @@ struct ListRssSheetView: View {
                         HStack {
                             TextField("URL du flux RSS", text: $linkManager.linkTapped)
                                 .focused($isFocused)
+                                .keyboardType(.URL)
+                                .textInputAutocapitalization(.never)
+                                .autocorrectionDisabled()
                                 .onAppear { linkManager.getClipboardContent() }
                             
                             Button {

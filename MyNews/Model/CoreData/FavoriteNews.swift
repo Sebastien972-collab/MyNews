@@ -46,19 +46,16 @@ class FavoriteNews {
         }
        return false
     }
-    ///This function remove a existing recipe
-     func removeElementInFavorite(article articleToRemove : Article) throws {
-        for (index ,article) in all.enumerated() {
-            if article.id == articleToRemove.id {
-                viewContext.delete(cdArticles[index])
-                
-                do {
-                    try viewContext.save()
-                }
-                catch {
-                    throw error
-                }
-            }
+    func removeElementInFavorite(article articleToRemove: Article) throws {
+        let request: NSFetchRequest<CDArticles> = CDArticles.fetchRequest()
+        request.predicate = NSPredicate(format: "url == %@", articleToRemove.url)
+        let matches = try viewContext.fetch(request)
+        matches.forEach { viewContext.delete($0) }
+        do {
+            try viewContext.save()
+        } catch {
+            viewContext.rollback()
+            throw error
         }
     }
     private func addNewArticleFavorite(article : Article) throws {
@@ -73,10 +70,9 @@ class FavoriteNews {
         articleFav.urlToImage = article.urlToImage
         do {
            
-            print("Try to save context")
             try viewContext.save()
-            print(all.count)
         } catch {
+            viewContext.rollback()
             throw error
         }
     }

@@ -16,20 +16,22 @@ struct NewsDetailView: View {
         ScrollView {
             VStack(spacing: 0) {
                 // --- HERO IMAGE ---
-                GeometryReader { geo in
-                    let minY = geo.frame(in: .global).minY
-                    AsyncImage(url: URL(string: article.urlToImage ?? "")) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geo.size.width, height: 300 + (minY > 0 ? minY : 0))
-                            .clipped()
-                            .offset(y: minY > 0 ? -minY : 0) // Effet de parallaxe
-                    } placeholder: {
-                        Rectangle().fill(.ultraThinMaterial)
+                if let imageURL = article.urlToImage, !imageURL.isEmpty {
+                    GeometryReader { geo in
+                        let minY = geo.frame(in: .global).minY
+                        AsyncImage(url: URL(string: article.urlToImage ?? "")) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geo.size.width, height: 300 + (minY > 0 ? minY : 0))
+                                .clipped()
+                                .offset(y: minY > 0 ? -minY : 0) // Effet de parallaxe
+                        } placeholder: {
+                            Rectangle().fill(.ultraThinMaterial)
+                        }
                     }
+                    .frame(height: 300)
                 }
-                .frame(height: 300)
 
                 // --- CONTENT CARD (Liquid Glass) ---
                 VStack(alignment: .leading, spacing: 20) {
@@ -97,12 +99,12 @@ struct NewsDetailView: View {
                     // On fait remonter la carte sur l'image
                     RoundedRectangle(cornerRadius: 35, style: .continuous)
                         .fill(.background) // S'adapte au mode Sombre/Clair
-                        .offset(y: -40)
+
                 )
-                .padding(.bottom, -40) // Compense l'offset
+
             }
         }
-        .ignoresSafeArea(.all, edges: .top)
+
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -113,6 +115,11 @@ struct NewsDetailView: View {
                         .foregroundColor(favoriteNewsVm.isFavorite(article) ? .yellow : .primary)
                 }
             }
+        }
+        .alert("Favoris", isPresented: $favoriteNewsVm.showError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(favoriteNewsVm.newsError.localizedDescription)
         }
         .navigationDestination(isPresented: $safariViewIsPresented) {
             #if !os(macOS)

@@ -13,7 +13,7 @@ struct Source : Codable, Hashable {
 }
 struct Article : Codable, Hashable, Equatable{
     var id: String{
-        return self.title
+        return self.url
     }
     let source: Source
     let author: String?
